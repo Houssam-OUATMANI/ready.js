@@ -1,0 +1,14 @@
+# Development & Source
+src/
+test/
+example/
+tsconfig.json
+
+# Documentation site
+docs-site/
+
+# Git and logs
+.git/
+.gitignore
+*.log
+.DS_Store

@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ready.js — Zero-Dependency TypeScript Micro-Framework</title>
+  <meta name="description" content="Zero-dependency, full TypeScript, multi-runtime micro-framework designed exclusively for RESTful JSON APIs across Bun, Node.js, and Deno.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+</head>
+<body>
+
+  <!-- Ambient Glow & Background Grid -->
+  <div class="bg-atmosphere">
+    <div class="bg-grid"></div>
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+    <div class="glow-orb glow-orb-3"></div>
+  </div>
+
+  <!-- FLOATING DOCK (HEADER ISLAND) -->
+  <header class="dock-container">
+    <div class="dock-island">
+      <a href="#overview" class="dock-brand">
+        <div class="dock-logo-icon">⚡</div>
+        <span>ready<span style="color: var(--accent-cyan);">.js</span></span>
+      </a>
+      <span class="dock-version-pill">v1.0.0</span>
+
+      <div class="dock-divider"></div>
+
+      <nav>
+        <ul class="dock-nav">
+          <li><a href="#overview" class="dock-nav-link active">Overview</a></li>
+          <li><a href="#quickstart" class="dock-nav-link">Quickstart</a></li>
+          <li><a href="#request" class="dock-nav-link">Request</a></li>
+          <li><a href="#context" class="dock-nav-link">Context</a></li>
+          <li><a href="#routing" class="dock-nav-link">Routing</a></li>
+          <li><a href="#middleware" class="dock-nav-link">Middleware</a></li>
+          <li><a href="#simulator" class="dock-nav-link">Playground</a></li>
+          <li><a href="#benchmarks" class="dock-nav-link">Benchmarks</a></li>
+        </ul>
+      </nav>
+
+      <div class="dock-divider"></div>
+
+      <div class="dock-actions">
+        <button class="dock-search-btn" id="dock-search-trigger" title="Quick Search (Ctrl+K)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span>Search docs</span>
+          <span class="dock-kbd">⌘K</span>
+        </button>
+
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="dock-github-btn" title="GitHub Repository">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN WRAPPER -->
+  <main class="page-wrapper">
+
+    <!-- HERO ISLAND -->
+    <section class="island hero-island" id="overview">
+      <div class="hero-badge-strip">
+        <span class="badge-island highlight">
+          <span class="badge-dot"></span>
+          Ready v1.0.0 Stable
+        </span>
+        <span class="badge-island">0 External Dependencies</span>
+        <span class="badge-island">Multi-Runtime: Bun • Node.js • Deno</span>
+        <span class="badge-island">Radix Tree O(k)</span>
+      </div>
+
+      <div class="hero-grid">
+        <div class="hero-left">
+          <h1 class="hero-title">
+            The zero-dependency <br>
+            <span class="gradient-text">micro-framework</span> <br>
+            for modern JSON APIs.
+          </h1>
+          <p class="hero-description">
+            Engineered exclusively for blazing-fast RESTful APIs. Runs natively on 
+            <strong>Bun</strong>, <strong>Node.js (18+)</strong>, and <strong>Deno</strong> with automatic parameter type coercion, 
+            onion-model middleware, and strict TypeScript ergonomics.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#quickstart" class="btn-island-primary">
+              <span>Get Started</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="#simulator" class="btn-island-secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <span>Try Live Simulator</span>
+            </a>
+          </div>
+
+          <!-- Quick Install Pill -->
+          <div class="hero-install-box">
+            <div class="hero-install-code" id="hero-pm-code">bun add ready</div>
+            <button class="copy-mini-btn" data-target="#hero-pm-code" title="Copy installation command">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Hero IDE Mockup Island -->
+        <div class="hero-editor-island">
+          <div class="editor-window-header">
+            <div class="editor-traffic-lights">
+              <span class="light-dot light-close"></span>
+              <span class="light-dot light-min"></span>
+              <span class="light-dot light-max"></span>
+            </div>
+            <div class="editor-tabs">
+              <button class="editor-tab active" data-tab="server.ts">server.ts</button>
+              <button class="editor-tab" data-tab="routes.ts">routes.ts</button>
+              <button class="editor-tab" data-tab="middleware.ts">middleware.ts</button>
+            </div>
+            <div class="editor-meta-badge">TS 5.9 Strict</div>
+          </div>
+          <pre class="editor-body" id="hero-editor-code"><span class="kw">import</span> { Ready } <span class="kw">from</span> <span class="str">"ready"</span>;
+
+<span class="kw">const</span> app = <span class="kw">new</span> <span class="typ">Ready</span>();
+
+<span class="cmt">// Global onion middleware</span>
+app.<span class="fn">use</span>(<span class="kw">async</span> (c, next) => {
+  <span class="kw">const</span> start = performance.<span class="fn">now</span>();
+  <span class="kw">await</span> <span class="fn">next</span>();
+  <span class="kw">const</span> ms = (performance.<span class="fn">now</span>() - start).<span class="fn">toFixed</span>(<span class="num">2</span>);
+  c.<span class="fn">header</span>(<span class="str">"X-Response-Time"</span>, <span class="str">`${ms}ms`</span>);
+});
+
+<span class="cmt">// GET route with typed auto-coercion</span>
+app.<span class="fn">get</span>(<span class="str">"/api/users/:id"</span>, (c) => {
+  <span class="kw">const</span> id = c.req.<span class="fn">param</span>&lt;<span class="typ">number</span>&gt;(<span class="str">"id"</span>);       <span class="cmt">// 42 (number)</span>
+  <span class="kw">const</span> limit = c.req.<span class="fn">query</span>&lt;<span class="typ">number</span>&gt;(<span class="str">"limit"</span>) ?? <span class="num">10</span>;
+
+  <span class="kw">return</span> c.<span class="fn">json</span>({ id, limit, name: <span class="str">`User #${id}`</span> });
+});
+
+<span class="cmt">// Universal server startup</span>
+<span class="kw">await</span> app.<span class="fn">listen</span>({ port: <span class="num">3000</span> });</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- METRICS STRIP ISLAND -->
+    <div class="metrics-strip">
+      <div class="island metric-island island-interactive">
+        <div class="metric-icon-box" style="background: rgba(56, 189, 248, 0.12); color: var(--accent-cyan);">⚡</div>
+        <div>
+          <div class="metric-value">0 deps</div>
+          <div class="metric-label">Zero external runtime dependencies</div>
+        </div>
+      </div>
+      <div class="island metric-island island-interactive">
+        <div class="metric-icon-box" style="background: rgba(99, 102, 241, 0.12); color: var(--accent-indigo);">🌐</div>
+        <div>
+          <div class="metric-value">3 Runtimes</div>
+          <div class="metric-label">Native Bun, Node.js (18+), Deno</div>
+        </div>
+      </div>
+      <div class="island metric-island island-interactive">
+        <div class="metric-icon-box" style="background: rgba(16, 185, 129, 0.12); color: var(--accent-emerald);">🚀</div>
+        <div>
+          <div class="metric-value">O(k) Radix</div>
+          <div class="metric-label">Path-length Trie router search</div>
+        </div>
+      </div>
+      <div class="island metric-island island-interactive">
+        <div class="metric-icon-box" style="background: rgba(245, 158, 11, 0.12); color: var(--accent-amber);">✨</div>
+        <div>
+          <div class="metric-value">Strict Types</div>
+          <div class="metric-label">Type coercion for params, query & body</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOCUMENTATION TWO-COLUMN ISLAND LAYOUT -->
+    <div class="docs-layout">
+
+      <!-- FLOATING STICKY SIDEBAR ISLAND -->
+      <aside class="island sidebar-island">
+        <div class="sidebar-heading">Getting Started</div>
+        <ul class="sidebar-menu">
+          <li><a href="#overview" class="sidebar-link active"><span class="sidebar-icon">🚀</span> Overview</a></li>
+          <li><a href="#installation" class="sidebar-link"><span class="sidebar-icon">📦</span> Installation</a></li>
+          <li><a href="#quickstart" class="sidebar-link"><span class="sidebar-icon">⚡</span> Quick Start</a></li>
+        </ul>
+
+        <div class="sidebar-heading">Core Architecture</div>
+        <ul class="sidebar-menu">
+          <li><a href="#request" class="sidebar-link"><span class="sidebar-icon">📥</span> Request (c.req)</a></li>
+          <li><a href="#request-coercion" class="sidebar-link"><span class="sidebar-icon">🔄</span> Type Coercion</a></li>
+          <li><a href="#context" class="sidebar-link"><span class="sidebar-icon">📤</span> Context & Responses</a></li>
+          <li><a href="#routing" class="sidebar-link"><span class="sidebar-icon">🌲</span> Radix Tree Routing</a></li>
+          <li><a href="#subrouting" class="sidebar-link"><span class="sidebar-icon">🧩</span> Modular Sub-Apps</a></li>
+          <li><a href="#middleware" class="sidebar-link"><span class="sidebar-icon">🧅</span> Onion Middleware</a></li>
+          <li><a href="#error-handling" class="sidebar-link"><span class="sidebar-icon">🛡️</span> Error Handling</a></li>
+          <li><a href="#runtimes" class="sidebar-link"><span class="sidebar-icon">⚙️</span> Multi-Runtime Adapters</a></li>
+        </ul>
+
+        <div class="sidebar-heading">Interactive & Specs</div>
+        <ul class="sidebar-menu">
+          <li><a href="#simulator" class="sidebar-link"><span class="sidebar-icon">🎮</span> Live Playground</a></li>
+          <li><a href="#benchmarks" class="sidebar-link"><span class="sidebar-icon">📊</span> Benchmarks</a></li>
+          <li><a href="#types" class="sidebar-link"><span class="sidebar-icon">🏷️</span> TypeScript Exports</a></li>
+        </ul>
+      </aside>
+
+      <!-- MAIN DOCUMENTATION STACK -->
+      <div class="docs-main-stack">
+
+        <!-- SECTION: INSTALLATION -->
+        <section class="island doc-section-island" id="installation">
+          <span class="section-tag">GETTING STARTED</span>
+          <h2 class="section-title">📦 Package Installation</h2>
+          <p class="section-desc">
+            Ready is published as a pure ES Module with comprehensive TypeScript declarations. 
+            Choose your preferred package manager:
+          </p>
+
+          <div class="pm-island-switcher">
+            <button class="pm-btn active" data-pm="bun">Bun</button>
+            <button class="pm-btn" data-pm="npm">npm</button>
+            <button class="pm-btn" data-pm="pnpm">pnpm</button>
+            <button class="pm-btn" data-pm="yarn">yarn</button>
+            <button class="pm-btn" data-pm="deno">Deno</button>
+          </div>
+
+          <div class="code-island">
+            <div class="code-header">
+              <span class="code-title">Terminal</span>
+              <button class="copy-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Copy</span>
+              </button>
+            </div>
+            <pre class="code-pre" id="pm-install-code"><span class="kw">bun</span> add ready</pre>
+          </div>
+        </section>
+
+        <!-- SECTION: QUICK START -->
+        <section class="island doc-section-island" id="quickstart">
+          <span class="section-tag">WALKTHROUGH</span>
+          <h2 class="section-title">⚡ Quick Start</h2>
+          <p class="section-desc">
+            Build a complete REST API with global middleware, typed route parameters, typed body payloads, 
+            and universal multi-runtime startup in under 30 lines.
+          </p>
+
+          <div class="code-island">
+            <div class="code-header">
+              <span class="code-title"><span class="code-lang-badge">TS</span> server.ts</span>
+              <button class="copy-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Copy</span>
+              </button>
+            </div>
+            <pre class="code-pre"><span class="kw">import</span> { Ready } <span class="kw">from</span> <span class="str">"ready"</span>;
+
+<span class="kw">const</span> app = <span class="kw">new</span> <span class="typ">Ready</span>();
+
+<span class="cmt">// 1. Global Middleware: response-time header</span>
+app.<span class="fn">use</span>(<span class="kw">async</span> (c, next) => {
+  <span class="kw">const</span> start = performance.<span class="fn">now</span>();
+  <span class="kw">await</span> <span class="fn">next</span>();
+  <span class="kw">const</span> ms = (performance.<span class="fn">now</span>() - start).<span class="fn">toFixed</span>(<span class="num">2</span>);
+  c.<span class="fn">header</span>(<span class="str">"X-Response-Time"</span>, <span class="str">`${ms}ms`</span>);
+});
+
+<span class="cmt">// 2. GET with auto-coerced parameter and query</span>
+app.<span class="fn">get</span>(<span class="str">"/api/users/:id"</span>, (c) => {
+  <span class="kw">const</span> id = c.req.<span class="fn">param</span>&lt;<span class="typ">number</span>&gt;(<span class="str">"id"</span>); <span class="cmt">// typeof id === "number"</span>
+  <span class="kw">const</span> limit = c.req.<span class="fn">query</span>&lt;<span class="typ">number</span>&gt;(<span class="str">"limit"</span>) ?? <span class="num">10</span>;
+
+  <span class="kw">return</span> c.<span class="fn">json</span>({
+    id,
+    limit,
+    name: <span class="str">`User #${id}`</span>,
+  });
+});
+
+<span class="cmt">// 3. POST with generic typed JSON body</span>
+<span class="kw">interface</span> <span class="typ">CreateUserDto</span> {
+  name: <span class="typ">string</span>;
+  email: <span class="typ">string</span>;
+}
+
+app.<span class="fn">post</span>(<span class="str">"/api/users"</span>, <span class="kw">async</span> (c) => {
+  <span class="kw">const</span> body = <span class="kw">await</span> c.req.<span class="fn">body</span>&lt;<span class="typ">CreateUserDto</span>&gt;();
+
+  <span class="kw">if</span> (!body.name || !body.email) {
+    <span class="kw">return</span> c.<span class="fn">json</span>({ error: <span class="str">"Missing required fields"</span> }, <span class="num">400</span>);
+  }
+
+  <span class="kw">return</span> c.<span class="fn">json</span>({ id: <span class="num">1</span>, ...body }, <span class="num">201</span>);
+});
+
+<span class="cmt">// 4. Universal listen (Bun, Node, Deno automatically detected)</span>
+<span class="kw">const</span> server = <span class="kw">await</span> app.<span class="fn">listen</span>({ port: <span class="num">3000</span> });
+console.<span class="fn">log</span>(<span class="str">`Server listening on http://${server.hostname}:${server.port}`</span>);</pre>
+          </div>
+        </section>
+
+        <!-- SECTION: REQUEST HANDLING & COERCION -->
+        <section class="island doc-section-island" id="request">
+          <span class="section-tag">API REFERENCE</span>
+          <h2 class="section-title">📥 Request Handling (<code style="color:var(--accent-cyan);">c.req</code>)</h2>
+          <p class="section-desc">
+            The <code style="color:var(--accent-cyan);">ReadyRequest</code> wrapper encapsulates the Web Standard Request 
+            instance and enhances it with automatic type coercion, query parsing, and cached JSON reading.
+          </p>
+
+          <div class="feature-islands-grid">
+            <div class="feature-mini-island">
+              <div class="feature-icon-badge" style="background: rgba(56, 189, 248, 0.12); color: var(--accent-cyan);">🔢</div>
+              <h4 class="feature-title">c.req.param&lt;T&gt;()</h4>
+              <p class="feature-text">
+                Extracts dynamic path segments (e.g. <code style="color:var(--syn-string);">:id</code>). Automatically coerces 
+                strings like <code style="color:var(--syn-string);">"42"</code> into numbers or booleans.
+              </p>
+            </div>
+            <div class="feature-mini-island">
+              <div class="feature-icon-badge" style="background: rgba(99, 102, 241, 0.12); color: var(--accent-indigo);">🔍</div>
+              <h4 class="feature-title">c.req.query&lt;T&gt;()</h4>
+              <p class="feature-text">
+                Extracts single search parameters or coerces the entire query string into a fully typed TypeScript record.
+              </p>
+            </div>
+            <div class="feature-mini-island">
+              <div class="feature-icon-badge" style="background: rgba(16, 185, 129, 0.12); color: var(--accent-emerald);">📦</div>
+              <h4 class="feature-title">c.req.body&lt;T&gt;()</h4>
+              <p class="feature-text">
+                Parses the JSON request stream into a strongly-typed DTO. Automatically caches the result for multiple reads.
+              </p>
+            </div>
+          </div>
+
+          <div class="code-island" id="request-coercion">
+            <div class="code-header">
+              <span class="code-title"><span class="code-lang-badge">TS</span> Type Coercion Demonstration</span>
+              <button class="copy-btn"><span>Copy</span></button>
+            </div>
+            <pre class="code-pre"><span class="cmt">// 1. Automatic param conversion</span>
+<span class="kw">const</span> id = c.req.<span class="fn">param</span>&lt;<span class="typ">number</span>&gt;(<span class="str">"id"</span>);             <span class="cmt">// "123" ➔ 123 (number)</span>
+<span class="kw">const</span> isActive = c.req.<span class="fn">param</span>&lt;<span class="typ">boolean</span>&gt;(<span class="str">"active"</span>);   <span class="cmt">// "true" ➔ true (boolean)</span>
+
+<span class="cmt">// 2. Custom explicit transformer</span>
+<span class="kw">const</span> bigId = c.req.<span class="fn">param</span>(<span class="str">"id"</span>, BigInt);            <span class="cmt">// BigInt("123")</span>
+
+<span class="cmt">// 3. Strongly-typed full query object</span>
+<span class="kw">interface</span> <span class="typ">CatalogFilters</span> {
+  limit: <span class="typ">number</span>;
+  offset: <span class="typ">number</span>;
+  inStock: <span class="typ">boolean</span>;
+  search?: <span class="typ">string</span>;
+}
+<span class="kw">const</span> filters = c.req.<span class="fn">query</span>&lt;<span class="typ">CatalogFilters</span>&gt;();
+
+<span class="cmt">// 4. Header inspection</span>
+<span class="kw">const</span> authHeader = c.req.<span class="fn">header</span>(<span class="str">"authorization"</span>);
+<span class="kw">const</span> rawRequest = c.req.raw; <span class="cmt">// Native Web Standard Request</span></pre>
+          </div>
+        </section>
+
+        <!-- SECTION: CONTEXT & RESPONSES -->
+        <section class="island doc-section-island" id="context">
+          <span class="section-tag">API REFERENCE</span>
+          <h2 class="section-title">📤 Context Object (<code style="color:var(--accent-indigo);">Context</code>)</h2>
+          <p class="section-desc">
+            The <code style="color:var(--accent-indigo);">Context</code> is passed to every route handler and middleware. 
+            It provides fluent setters for headers, status codes, state management, and JSON response formatting.
+          </p>
+
+          <div class="code-island">
+            <div class="code-header">
+              <span class="code-title"><span class="code-lang-badge">TS</span> context-usage.ts</span>
+              <button class="copy-btn"><span>Copy</span></button>
+            </div>
+            <pre class="code-pre"><span class="cmt">// Returning formatted JSON response with custom HTTP status code</span>
+<span class="kw">return</span> c.<span class="fn">json</span>({ message: <span class="str">"Resource created"</span> }, <span class="num">201</span>);
+
+<span class="cmt">// Fluent chained header configuration</span>
+c.<span class="fn">header</span>(<span class="str">"Cache-Control"</span>, <span class="str">"no-store, max-age=0"</span>);
+c.<span class="fn">header</span>(<span class="str">"X-Rate-Limit-Remaining"</span>, <span class="str">"99"</span>);
+c.<span class="fn">status</span>(<span class="num">200</span>);
+
+<span class="cmt">// Context state sharing across middleware stages</span>
+c.<span class="fn">set</span>(<span class="str">"currentUser"</span>, { id: <span class="num">42</span>, role: <span class="str">"admin"</span> });
+
+<span class="cmt">// Retrieve state in downstream route handler</span>
+<span class="kw">const</span> user = c.<span class="fn">get</span>&lt;<span class="typ">User</span>&gt;(<span class="str">"currentUser"</span>);</pre>
+          </div>
+        </section>
+
+        <!-- SECTION: RADIX ROUTING & SUB-ROUTING -->
+        <section class="island doc-section-island" id="routing">
+          <span class="section-tag">ENGINE ARCHITECTURE</span>
+          <h2 class="section-title">🌲 High-Speed Radix Tree Router</h2>
+          <p class="section-desc">
+            Ready implements an internal Radix Tree (compact Trie) router that matches paths in O(k) time where k is the 
+            path segment depth, rather than iterating through regexes. Supports dynamic segments and wildcard cascades.
+          </p>
+
+          <div class="feature-islands-grid">
+            <div class="feature-mini-island">
+              <div class="feature-icon-badge" style="background: rgba(56, 189, 248, 0.12); color: var(--accent-cyan);">🎯</div>
+              <h4 class="feature-title">Static Match</h4>
+              <p class="feature-text"><code style="color:var(--syn-string);">/api/v1/health</code><br>Matched via direct map lookup.</p>
+            </div>
+            <div class="feature-mini-island">
+              <div class="feature-icon-badge" style="background: rgba(99, 102, 241, 0.12); color: var(--accent-indigo);">⚡</div>
+              <h4 class="feature-title">Dynamic Parameters</h4>
+              <p class="feature-text"><code style="color:var(--syn-string);">/users/:userId/posts/:id</code><br>Captures both keys cleanly.</p>
+            </div>
+            <div class="feature-mini-island">
+              <div class="feature-icon-badge" style="background: rgba(245, 158, 11, 0.12); color: var(--accent-amber);">🌟</div>
+              <h4 class="feature-title">Wildcards</h4>
+              <p class="feature-text"><code style="color:var(--syn-string);">/public/*</code><br>Matches any suffix subpath.</p>
+            </div>
+          </div>
+
+          <div class="code-island" id="subrouting">
+            <div class="code-header">
+              <span class="code-title"><span class="code-lang-badge">TS</span> Modular Sub-Routing via app.route()</span>
+              <button class="copy-btn"><span>Copy</span></button>
+            </div>
+            <pre class="code-pre"><span class="cmt">// Sub-router for Authentication</span>
+<span class="kw">const</span> auth = <span class="kw">new</span> <span class="typ">Ready</span>();
+auth.<span class="fn">post</span>(<span class="str">"/login"</span>, <span class="kw">async</span> (c) => c.<span class="fn">json</span>({ token: <span class="str">"jwt..."</span> }));
+auth.<span class="fn">post</span>(<span class="str">"/logout"</span>, <span class="kw">async</span> (c) => c.<span class="fn">json</span>({ success: <span class="num">true</span> }));
+
+<span class="cmt">// Sub-router for Products</span>
+<span class="kw">const</span> products = <span class="kw">new</span> <span class="typ">Ready</span>();
+products.<span class="fn">get</span>(<span class="str">"/"</span>, (c) => c.<span class="fn">json</span>([{ id: <span class="num">1</span>, name: <span class="str">"Keyboard"</span> }]));
+products.<span class="fn">get</span>(<span class="str">"/:id"</span>, (c) => c.<span class="fn">json</span>({ id: c.req.<span class="fn">param</span>&lt;<span class="typ">number</span>&gt;(<span class="str">"id"</span>) }));
+
+<span class="cmt">// Mount to main application</span>
+app.<span class="fn">route</span>(<span class="str">"/api/auth"</span>, auth);
+app.<span class="fn">route</span>(<span class="str">"/api/products"</span>, products);
+
+<span class="cmt">// Endpoints created:</span>
+<span class="cmt">// POST /api/auth/login</span>
+<span class="cmt">// POST /api/auth/logout</span>
+<span class="cmt">// GET  /api/products</span>
+<span class="cmt">// GET  /api/products/:id</span></pre>
+          </div>
+        </section>
+
+        <!-- SECTION: ONION MIDDLEWARE & ERROR HANDLING -->
+        <section class="island doc-section-island" id="middleware">
+          <span class="section-tag">PIPELINE ARCHITECTURE</span>
+          <h2 class="section-title">🧅 Onion Middleware Model</h2>
+          <p class="section-desc">
+            Ready uses Koa-style cascading middleware. Calling <code style="color:var(--accent-purple);">await next()</code> 
+            pauses current execution, executes downstream handlers, and resumes back for post-processing.
+          </p>
+
+          <div class="code-island">
+            <div class="code-header">
+              <span class="code-title"><span class="code-lang-badge">TS</span> middleware-pipeline.ts</span>
+              <button class="copy-btn"><span>Copy</span></button>
+            </div>
+            <pre class="code-pre"><span class="cmt">// Global Logger Middleware</span>
+app.<span class="fn">use</span>(<span class="kw">async</span> (c, next) => {
+  <span class="kw">const</span> start = performance.<span class="fn">now</span>();
+  
+  <span class="kw">await</span> <span class="fn">next</span>(); <span class="cmt">// <-- Executes route handlers and downstream middleware</span>
+  
+  <span class="kw">const</span> elapsed = (performance.<span class="fn">now</span>() - start).<span class="fn">toFixed</span>(<span class="num">2</span>);
+  console.<span class="fn">log</span>(<span class="str">`[${c.req.method}] ${c.req.pathname} -> ${elapsed}ms`</span>);
+});
+
+<span class="cmt">// Path-Scoped Middleware with Wildcard</span>
+app.<span class="fn">use</span>(<span class="str">"/api/admin/*"</span>, <span class="kw">async</span> (c, next) => {
+  <span class="kw">const</span> token = c.req.<span class="fn">header</span>(<span class="str">"Authorization"</span>);
+  <span class="kw">if</span> (!token || !token.<span class="fn">startsWith</span>(<span class="str">"Bearer "</span>)) {
+    <span class="kw">return</span> c.<span class="fn">json</span>({ error: <span class="str">"Unauthorized"</span>, status: <span class="num">401</span> }, <span class="num">401</span>);
+  }
+  <span class="kw">await</span> <span class="fn">next</span>();
+});</pre>
+          </div>
+
+          <div class="code-island" id="error-handling">
+            <div class="code-header">
+              <span class="code-title"><span class="code-lang-badge">TS</span> Centralized Error Handlers</span>
+              <button class="copy-btn"><span>Copy</span></button>
+            </div>
+            <pre class="code-pre"><span class="cmt">// Custom Global 500 Exception Handler</span>
+app.<span class="fn">onError</span>((err, c) => {
+  console.<span class="fn">error</span>(<span class="str">"Internal Exception:"</span>, err);
+  <span class="kw">return</span> c.<span class="fn">json</span>({
+    error: <span class="str">"Internal Server Error"</span>,
+    message: err.message,
+    statusCode: <span class="num">500</span>
+  }, <span class="num">500</span>);
+});
+
+<span class="cmt">// Custom 404 Route Not Found Handler</span>
+app.<span class="fn">onNotFound</span>((c) => {
+  <span class="kw">return</span> c.<span class="fn">json</span>({
+    error: <span class="str">"Not Found"</span>,
+    path: c.req.pathname,
+    statusCode: <span class="num">404</span>
+  }, <span class="num">404</span>);
+});</pre>
+          </div>
+        </section>
+
+        <!-- SECTION: MULTI-RUNTIME EXECUTION -->
+        <section class="island doc-section-island" id="runtimes">
+          <span class="section-tag">DEPLOYMENT & ADAPTERS</span>
+          <h2 class="section-title">⚙️ Multi-Runtime Support</h2>
+          <p class="section-desc">
+            Write your API once and run anywhere. Ready detects your environment automatically upon calling 
+            <code style="color:var(--accent-cyan);">app.listen()</code>.
+          </p>
+
+          <div class="feature-islands-grid">
+            <div class="feature-mini-island">
+              <div class="feature-icon-badge" style="background: rgba(244, 63, 94, 0.12); color: var(--accent-rose);">🥟</div>
+              <h4 class="feature-title">Bun Native</h4>
+              <p class="feature-text">Binds directly to <code style="color:var(--accent-cyan);">Bun.serve()</code> with zero overhead.</p>
+            </div>
+            <div class="feature-mini-island">
+              <div class="feature-icon-badge" style="background: rgba(34, 197, 94, 0.12); color: var(--accent-emerald);">🟢</div>
+              <h4 class="feature-title">Node.js (18+)</h4>
+              <p class="feature-text">Uses native <code style="color:var(--accent-cyan);">node:http</code> and translates Web Streams effortlessly.</p>
+            </div>
+            <div class="feature-mini-island">
+              <div class="feature-icon-badge" style="background: rgba(56, 189, 248, 0.12); color: var(--accent-cyan);">🦕</div>
+              <h4 class="feature-title">Deno / Edge</h4>
+              <p class="feature-text">Exposes standard <code style="color:var(--accent-cyan);">app.fetch(request)</code> for Cloudflare Workers & Fastly.</p>
+            </div>
+          </div>
+
+          <div class="code-island">
+            <div class="code-header">
+              <span class="code-title"><span class="code-lang-badge">TS</span> Edge & Cloudflare Workers Export</span>
+              <button class="copy-btn"><span>Copy</span></button>
+            </div>
+            <pre class="code-pre"><span class="cmt">// Standard Web Fetch export for Edge environments</span>
+<span class="kw">export default</span> {
+  fetch: app.fetch
+};</pre>
+          </div>
+        </section>
+
+        <!-- SECTION: INTERACTIVE LIVE SIMULATOR ISLAND -->
+        <section class="island simulator-island" id="simulator">
+          <div class="sim-header">
+            <div>
+              <span class="sim-badge">INTERACTIVE EXPERIMENT</span>
+              <h2 style="font-size: 1.5rem; font-weight: 700; margin-top: 6px;">🎮 Live Framework Simulator</h2>
+            </div>
+            <select class="sim-select" id="sim-preset">
+              <option value="user-get">Preset: GET /api/users/:id</option>
+              <option value="user-post">Preset: POST /api/users</option>
+              <option value="auth-fail">Preset: Auth Guard (401)</option>
+              <option value="not-found">Preset: Unmatched 404</option>
+            </select>
+          </div>
+
+          <div class="sim-input-row">
+            <select class="sim-select" id="sim-method">
+              <option value="GET">GET</option>
+              <option value="POST">POST</option>
+              <option value="PUT">PUT</option>
+              <option value="DELETE">DELETE</option>
+            </select>
+            <input type="text" class="sim-input" id="sim-url" value="/api/users/42?limit=10" placeholder="/api/users/:id">
+            <button class="sim-btn-send" id="sim-send-btn">
+              <span>Send</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </div>
+
+          <div class="sim-results-grid">
+            <!-- Simulated Response Preview -->
+            <div class="sim-card">
+              <div class="sim-card-title">
+                <span>Response Body</span>
+                <div style="display:flex; gap:8px;">
+                  <span id="sim-res-status" class="editor-meta-badge">200 OK</span>
+                  <span id="sim-res-time" class="editor-meta-badge" style="color:var(--accent-cyan); background:rgba(56,189,248,0.1); border-color:rgba(56,189,248,0.2);">0.42ms</span>
+                </div>
+              </div>
+              <pre class="sim-code-preview" id="sim-res-body">{
+  "id": 42,
+  "limit": 10,
+  "name": "User #42"
+}</pre>
+            </div>
+
+            <!-- Coercion & Pipeline Metadata -->
+            <div class="sim-card">
+              <div class="sim-card-title">
+                <span>Type Coercion Inspector</span>
+                <span class="sim-badge">Strict Type Engine</span>
+              </div>
+              <div id="sim-coercion-info" style="margin-bottom: 12px;"></div>
+              
+              <div class="sim-card-title" style="margin-top: 14px;">
+                <span>Response Headers</span>
+              </div>
+              <pre class="sim-code-preview" id="sim-res-headers" style="font-size:0.75rem; color:var(--text-muted);">Content-Type: application/json; charset=utf-8
+X-Response-Time: 0.42ms
+X-Powered-By: Ready Micro-Framework (v1.0.0)</pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION: BENCHMARKS & COMPARISONS -->
+        <section class="island doc-section-island" id="benchmarks">
+          <span class="section-tag">PERFORMANCE & ARCHITECTURE</span>
+          <h2 class="section-title">📊 Architectural Comparison</h2>
+          <p class="section-desc">
+            Ready was crafted to strip away legacy baggage (HTML rendering, view engines, sessions) and focus 100% on pure 
+            JSON API micro-services.
+          </p>
+
+          <table class="table-island">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th style="color:var(--accent-cyan);">Ready.js</th>
+                <th>Express</th>
+                <th>Fastify</th>
+                <th>Hono</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="highlight-row">
+                <td>Zero Runtime Dependencies</td>
+                <td><span class="check-pill">✓ 0 Dependencies</span></td>
+                <td><span class="cross-pill">✗ 30+ Dependencies</span></td>
+                <td><span class="cross-pill">✗ 15+ Dependencies</span></td>
+                <td><span class="check-pill">✓ 0 Dependencies</span></td>
+              </tr>
+              <tr>
+                <td>Multi-Runtime (Node, Bun, Deno)</td>
+                <td><span class="check-pill">✓ Native Universal</span></td>
+                <td><span class="cross-pill">✗ Node.js only</span></td>
+                <td><span class="cross-pill">✗ Node.js mostly</span></td>
+                <td><span class="check-pill">✓ Universal</span></td>
+              </tr>
+              <tr>
+                <td>Automatic Param Type Coercion</td>
+                <td><span class="check-pill">✓ Built-in typed &lt;T&gt;</span></td>
+                <td><span class="cross-pill">✗ string only</span></td>
+                <td><span class="cross-pill">✗ Requires schema</span></td>
+                <td><span class="cross-pill">✗ Requires validator</span></td>
+              </tr>
+              <tr>
+                <td>Routing Algorithm</td>
+                <td><span class="check-pill">Radix Trie O(k)</span></td>
+                <td>Linear Regex O(n)</td>
+                <td>Radix Trie</td>
+                <td>Smart RegExp / Trie</td>
+              </tr>
+              <tr>
+                <td>RESTful JSON Focus</td>
+                <td><span class="check-pill">✓ 100% JSON Pure</span></td>
+                <td><span class="cross-pill">✗ Heavy HTML/View bloat</span></td>
+                <td>Hybrid</td>
+                <td>Hybrid</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- SECTION: TYPESCRIPT DX & EXPORTS -->
+        <section class="island doc-section-island" id="types">
+          <span class="section-tag">TYPESCRIPT CONTRACTS</span>
+          <h2 class="section-title">🏷️ Type Declarations & Exports</h2>
+          <p class="section-desc">
+            All primitives, handlers, middlewares, and configuration structures are strictly typed and exported from 
+            the root module.
+          </p>
+
+          <div class="code-island">
+            <div class="code-header">
+              <span class="code-title"><span class="code-lang-badge">TS</span> Available Types</span>
+              <button class="copy-btn"><span>Copy</span></button>
+            </div>
+            <pre class="code-pre"><span class="kw">import</span> <span class="kw">type</span> {
+  <span class="typ">HttpMethod</span>,       <span class="cmt">// "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "OPTIONS" | "HEAD" | "ALL"</span>
+  <span class="typ">Handler</span>,          <span class="cmt">// (c: Context) => Response | Promise<Response> | unknown</span>
+  <span class="typ">Middleware</span>,       <span class="cmt">// (c: Context, next: NextFunction) => Promise<void> | void</span>
+  <span class="typ">NextFunction</span>,     <span class="cmt">// () => Promise<void></span>
+  <span class="typ">ErrorHandler</span>,     <span class="cmt">// (err: Error, c: Context) => Response | unknown</span>
+  <span class="typ">NotFoundHandler</span>,  <span class="cmt">// (c: Context) => Response | unknown</span>
+  <span class="typ">RouteParams</span>,      <span class="cmt">// Record<string, string></span>
+  <span class="typ">RouteMatch</span>,       <span class="cmt">// { handlers: Handler[], params: RouteParams }</span>
+  <span class="typ">ServerOptions</span>,    <span class="cmt">// { port?: number, hostname?: string }</span>
+  <span class="typ">ServerInstance</span>    <span class="cmt">// { port: number, hostname: string, close: () => void }</span>
+} <span class="kw">from</span> <span class="str">"ready"</span>;</pre>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- FOOTER ISLAND -->
+    <footer class="island footer-island">
+      <div class="footer-left">
+        <div class="dock-logo-icon">⚡</div>
+        <div>
+          <div class="footer-brand">Ready.js</div>
+          <div class="footer-text">Zero-dependency micro-framework for RESTful JSON APIs. Released under the MIT License.</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#overview" class="footer-link">Documentation</a>
+        <a href="#quickstart" class="footer-link">Quickstart</a>
+        <a href="#simulator" class="footer-link">Playground</a>
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- SEARCH MODAL ISLAND (CMD+K) -->
+  <div class="search-modal-backdrop" id="search-modal">
+    <div class="search-modal-island">
+      <div class="search-input-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="search-input" class="search-modal-input" placeholder="Search documentation, methods, types... (e.g. param, routing, body)">
+        <span class="dock-kbd">ESC</span>
+      </div>
+      <div class="search-results-list" id="search-results"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
