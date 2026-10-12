@@ -1,6 +1,6 @@
 {
   "name": "ready-framework",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Zero-dependency, full TypeScript, multi-runtime micro-framework for RESTful JSON APIs",
   "type": "module",
   "main": "./dist/src/index.js",
