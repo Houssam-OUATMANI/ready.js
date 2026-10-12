@@ -1,8 +1,8 @@
 /**
  * @file app.ts
- * @description Classe principale Ready représentant l'application HTTP.
- * Fournit l'API déclarative pour les routes, les middlewares, la gestion d'erreurs
- * et l'interface universelle Web Standard `app.fetch()`.
+ * @description Main Ready application class representing the HTTP micro-framework.
+ * Provides declarative routing methods, middleware chaining, centralized error handling,
+ * and the universal Web Standard `app.fetch()` interface.
  */
 
 import { Context } from "./context.js";
@@ -21,41 +21,41 @@ import { serve } from "./server/adapter.js";
 
 export class Ready {
   /**
-   * Gestionnaire de routage interne.
+   * Internal routing coordinator and radix tree.
    */
   public readonly router: Router = new Router();
 
   /**
-   * Gestionnaire d'erreurs 404 personnalisé.
+   * Default 404 Not Found error handler.
    */
   private notFoundHandler: NotFoundHandler = (c: Context) => {
     return c.json(
       {
         error: "NotFound",
-        message: `Route introuvable : ${c.req.method} ${c.req.pathname}`,
+        message: `Route not found: ${c.req.method} ${c.req.pathname}`,
       },
       404
     );
   };
 
   /**
-   * Gestionnaire d'erreurs globales (500).
+   * Default centralized 500 Internal Server Error handler.
    */
   private errorHandler: ErrorHandler = (err: Error, c: Context) => {
     return c.json(
       {
         error: "InternalServerError",
-        message: err.message || "Une erreur inattendue est survenue",
+        message: err.message || "An unexpected error occurred",
       },
       500
     );
   };
 
   /**
-   * Enregistre un middleware global ou lié à un préfixe d'URL.
+   * Registers a global middleware or one scoped to a URL path prefix.
    *
-   * @param prefixOrMiddleware Préfixe optionnel (ex: "/api") ou middleware
-   * @param handlers Middlewares supplémentaires
+   * @param prefixOrMiddleware Optional path prefix (e.g. "/api") or middleware
+   * @param handlers Additional middlewares
    *
    * @example
    * app.use(async (c, next) => { await next(); });
@@ -70,7 +70,7 @@ export class Ready {
   }
 
   /**
-   * Déclare une route HTTP GET.
+   * Registers an HTTP GET route.
    */
   public get(path: string, ...handlers: Handler[]): this {
     this.router.add("GET", path, ...handlers);
@@ -78,7 +78,7 @@ export class Ready {
   }
 
   /**
-   * Déclare une route HTTP POST.
+   * Registers an HTTP POST route.
    */
   public post(path: string, ...handlers: Handler[]): this {
     this.router.add("POST", path, ...handlers);
@@ -86,7 +86,7 @@ export class Ready {
   }
 
   /**
-   * Déclare une route HTTP PUT.
+   * Registers an HTTP PUT route.
    */
   public put(path: string, ...handlers: Handler[]): this {
     this.router.add("PUT", path, ...handlers);
@@ -94,7 +94,7 @@ export class Ready {
   }
 
   /**
-   * Déclare une route HTTP PATCH.
+   * Registers an HTTP PATCH route.
    */
   public patch(path: string, ...handlers: Handler[]): this {
     this.router.add("PATCH", path, ...handlers);
@@ -102,7 +102,7 @@ export class Ready {
   }
 
   /**
-   * Déclare une route HTTP DELETE.
+   * Registers an HTTP DELETE route.
    */
   public delete(path: string, ...handlers: Handler[]): this {
     this.router.add("DELETE", path, ...handlers);
@@ -110,7 +110,7 @@ export class Ready {
   }
 
   /**
-   * Déclare une route HTTP OPTIONS.
+   * Registers an HTTP OPTIONS route.
    */
   public options(path: string, ...handlers: Handler[]): this {
     this.router.add("OPTIONS", path, ...handlers);
@@ -118,7 +118,7 @@ export class Ready {
   }
 
   /**
-   * Déclare une route HTTP HEAD.
+   * Registers an HTTP HEAD route.
    */
   public head(path: string, ...handlers: Handler[]): this {
     this.router.add("HEAD", path, ...handlers);
@@ -126,7 +126,7 @@ export class Ready {
   }
 
   /**
-   * Déclare une route répondant à toutes les méthodes HTTP.
+   * Registers a route matching all HTTP methods.
    */
   public all(path: string, ...handlers: Handler[]): this {
     this.router.add("ALL", path, ...handlers);
@@ -134,10 +134,10 @@ export class Ready {
   }
 
   /**
-   * Monte une sous-application sous un préfixe d'URL pour modulariser l'API.
+   * Mounts a sub-application under a URL prefix to modularize API endpoints.
    *
-   * @param prefix Préfixe de montage (ex: "/api/v1")
-   * @param subApp Instance Ready de la sous-application
+   * @param prefix Mount prefix (e.g. "/api/v1")
+   * @param subApp Ready instance of the sub-application
    *
    * @example
    * const users = new Ready();
@@ -150,9 +150,9 @@ export class Ready {
   }
 
   /**
-   * Définit un gestionnaire personnalisé pour les erreurs non interceptées.
+   * Overrides the global unhandled exception handler.
    *
-   * @param handler Fonction prenant l'erreur et le contexte
+   * @param handler Function accepting error and context
    */
   public onError(handler: ErrorHandler): this {
     this.errorHandler = handler;
@@ -160,9 +160,9 @@ export class Ready {
   }
 
   /**
-   * Définit un gestionnaire personnalisé pour les requêtes 404 Not Found.
+   * Overrides the global 404 Not Found handler.
    *
-   * @param handler Fonction prenant le contexte
+   * @param handler Function accepting context
    */
   public notFound(handler: NotFoundHandler): this {
     this.notFoundHandler = handler;
@@ -170,23 +170,23 @@ export class Ready {
   }
 
   /**
-   * Point d'entrée standard Web (Fetch API).
-   * Compatible nativement avec Bun.serve, Deno.serve, Cloudflare Workers
-   * et via notre adaptateur natif node:http sous Node.js.
+   * Web Standards Fetch API handler.
+   * Natively compatible with Bun.serve, Deno.serve, Cloudflare Workers,
+   * and Node.js via the zero-dependency node:http adapter.
    *
-   * @param request Instance standard Request du Web
-   * @returns Promesse résolue avec l'instance standard Response
+   * @param request Standard Web Request instance
+   * @returns Promise resolving to a standard Web Response
    */
   public fetch = async (request: Request): Promise<Response> => {
     const url = new URL(request.url);
     const method = request.method.toUpperCase() as HttpMethod;
     const pathname = url.pathname;
 
-    // 1. Recherche d'une correspondance de route
+    // 1. Look for matching route in the router
     const match = this.router.match(method, pathname);
 
     if (!match) {
-      // Exécution des middlewares applicables au chemin avant le 404 (ex: headers CORS)
+      // Execute any prefix middlewares before generating the 404 response (e.g. CORS headers)
       const prefixMiddlewares = this.router.getMiddlewaresForPath(pathname);
       const c = new Context(request, {});
 
@@ -205,7 +205,7 @@ export class Ready {
           return (
             c.finalResponse ??
             c.json(
-              { error: "NotFound", message: `Route introuvable : ${method} ${pathname}` },
+              { error: "NotFound", message: `Route not found: ${method} ${pathname}` },
               404
             )
           );
@@ -219,7 +219,7 @@ export class Ready {
       }
     }
 
-    // 2. Route trouvée : initialisation du contexte avec les paramètres extraits
+    // 2. Route matched: initialize context with extracted URL params
     const c = new Context(request, match.params);
 
     try {
@@ -230,7 +230,7 @@ export class Ready {
         return c.finalResponse;
       }
 
-      // Si aucun contenu n'a été émis explicitement
+      // If no response was explicitly returned, default to empty 200 JSON
       return c.json({ success: true }, 200);
     } catch (err) {
       return this.handleCatch(err as Error, c);
@@ -238,7 +238,7 @@ export class Ready {
   };
 
   /**
-   * Traite les erreurs levées dans le pipeline en exécutant l'errorHandler configuré.
+   * Handles errors thrown during middleware or handler pipeline execution.
    */
   private async handleCatch(err: Error, c: Context): Promise<Response> {
     try {
@@ -257,11 +257,11 @@ export class Ready {
         )
       );
     } catch (fallbackError) {
-      // Secours ultime si l'errorHandler lui-même échoue
+      // Fallback emergency response if the custom error handler itself throws
       return new Response(
         JSON.stringify({
           error: "InternalServerError",
-          message: (fallbackError as Error).message || "Erreur fatale",
+          message: (fallbackError as Error).message || "Fatal Server Error",
         }),
         {
           status: 500,
@@ -272,11 +272,11 @@ export class Ready {
   }
 
   /**
-   * Démarre le serveur HTTP sur le port et l'hôte spécifiés.
-   * Détecte automatiquement l'environnement d'exécution (Bun, Node.js, Deno).
+   * Starts the HTTP server on the specified port and hostname.
+   * Automatically detects the runtime environment (Bun, Node.js, Deno).
    *
-   * @param options Options d'écoute (port, hostname)
-   * @returns Instance du serveur actif avec méthode .close()
+   * @param options Server listening options (port, hostname)
+   * @returns Active server instance with a `.close()` method
    */
   public async listen(options?: ServerOptions): Promise<ServerInstance> {
     return serve(this, options);

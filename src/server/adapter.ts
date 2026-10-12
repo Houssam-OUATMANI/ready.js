@@ -1,7 +1,7 @@
 /**
  * @file server/adapter.ts
- * @description Détecteur et adaptateur multi-runtime universel (Bun, Deno, Node.js).
- * Choisit automatiquement la couche réseau la plus performante sans configuration requise.
+ * @description Universal multi-runtime detector and adapter (Bun, Deno, Node.js).
+ * Automatically selects the fastest native networking layer with zero configuration.
  */
 
 import type { Ready } from "../app.js";
@@ -9,32 +9,34 @@ import type { ServerInstance, ServerOptions } from "../types/index.js";
 import { serveNode } from "./node.js";
 import { serveBun } from "./bun.js";
 
-// Déclaration de type pour l'environnement global Deno
+// Global declarations for Bun and Deno environments
+declare const Bun: {
+  serve?: unknown;
+} | undefined;
+
 declare const Deno: {
-  serve: (
+  serve?: (
     options: { port?: number; hostname?: string },
     handler: (req: Request) => Response | Promise<Response>
   ) => {
     shutdown: () => Promise<void>;
   };
-};
+} | undefined;
 
 /**
- * Lance l'application Ready sur le serveur approprié selon le runtime détecté.
+ * Boots the Ready application on the appropriate server based on the active runtime.
  *
- * @param app Instance de l'application Ready
- * @param options Options d'écoute (port, hostname)
- * @returns Instance unifiée ServerInstance
+ * @param app Ready application instance
+ * @param options Server listening options (port, hostname)
+ * @returns Unified ServerInstance
  */
 export async function serve(app: Ready, options: ServerOptions = {}): Promise<ServerInstance> {
-  // 1. Détection de Bun
-  // @ts-expect-error Vérification globale de Bun
+  // 1. Detect Bun runtime
   if (typeof Bun !== "undefined" && typeof Bun.serve === "function") {
     return serveBun(app, options);
   }
 
-  // 2. Détection de Deno
-  // @ts-expect-error Vérification globale de Deno
+  // 2. Detect Deno runtime
   if (typeof Deno !== "undefined" && typeof Deno.serve === "function") {
     const port = options.port ?? (process.env.PORT ? Number(process.env.PORT) : 3000);
     const hostname = options.hostname ?? "0.0.0.0";
@@ -49,6 +51,6 @@ export async function serve(app: Ready, options: ServerOptions = {}): Promise<Se
     };
   }
 
-  // 3. Repli par défaut sur Node.js (via node:http natif)
+  // 3. Fallback to native Node.js (via node:http)
   return serveNode(app, options);
 }

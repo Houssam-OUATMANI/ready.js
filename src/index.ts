@@ -1,7 +1,7 @@
 /**
  * @file index.ts
- * @description Point d'entrée principal du micro-framework Ready.
- * Exporte la classe Ready, le Contexte, la Requête et l'ensemble des types.
+ * @description Main entrypoint for the Ready micro-framework.
+ * Exports the Ready application class, Context, Request, and all core types.
  */
 
 export { Ready, Ready as ReadyApp } from "./app.js";
@@ -24,6 +24,6 @@ export type {
   ServerInstance,
 } from "./types/index.js";
 
-// Export par défaut
+// Default export
 import { Ready } from "./app.js";
 export default Ready;

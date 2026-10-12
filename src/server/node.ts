@@ -1,7 +1,7 @@
 /**
  * @file server/node.ts
- * @description Adaptateur de serveur HTTP natif pour Node.js (zéro dépendance externe).
- * Convertit les flux IncomingMessage et ServerResponse en requêtes/réponses Web Standard.
+ * @description Native HTTP server adapter for Node.js (zero external dependencies).
+ * Bridges Node.js IncomingMessage and ServerResponse with standard Web Request and Response objects.
  */
 
 import http from "node:http";
@@ -10,11 +10,11 @@ import type { Ready } from "../app.js";
 import type { ServerInstance, ServerOptions } from "../types/index.js";
 
 /**
- * Démarre un serveur Node.js natif via le module 'node:http'.
+ * Starts a native Node.js HTTP server using the built-in 'node:http' module.
  *
- * @param app Instance de l'application Ready
- * @param options Options de port et d'hôte
- * @returns Instance du serveur en écoute avec méthode close()
+ * @param app Ready application instance
+ * @param options Server port and hostname configuration
+ * @returns Running server instance with a `.close()` method
  */
 export function serveNode(app: Ready, options: ServerOptions = {}): Promise<ServerInstance> {
   const port = options.port ?? (process.env.PORT ? Number(process.env.PORT) : 3000);
@@ -23,12 +23,12 @@ export function serveNode(app: Ready, options: ServerOptions = {}): Promise<Serv
   return new Promise((resolve, reject) => {
     const server = http.createServer(async (req, res) => {
       try {
-        // 1. Reconstitution de l'URL complète
+        // 1. Reconstruct full request URL
         const host = req.headers.host || `${hostname}:${port}`;
         const protocol = "http";
         const url = new URL(req.url || "/", `${protocol}://${host}`);
 
-        // 2. Conversion des en-têtes Node vers Web Standard Headers
+        // 2. Convert Node.js headers to standard Web Headers
         const headers = new Headers();
         for (const [key, value] of Object.entries(req.headers)) {
           if (value === undefined) continue;
@@ -39,23 +39,23 @@ export function serveNode(app: Ready, options: ServerOptions = {}): Promise<Serv
           }
         }
 
-        // 3. Conversion du flux de corps si la méthode le permet
+        // 3. Convert request body stream if allowed by method
         const hasBody = req.method !== "GET" && req.method !== "HEAD";
         const bodyStream = hasBody ? (Readable.toWeb(req) as ReadableStream) : null;
 
-        // 4. Création de l'objet Request Web Standard
+        // 4. Create standard Web Request instance
         const webRequest = new Request(url.toString(), {
           method: req.method,
           headers,
           body: bodyStream,
-          // @ts-expect-error 'duplex' est requis par Node.js lors de l'utilisation d'un ReadableStream
+          // @ts-expect-error 'duplex' is required in Node.js when body is a stream
           duplex: "half",
         });
 
-        // 5. Exécution du pipeline Ready
+        // 5. Execute Ready application pipeline
         const webResponse = await app.fetch(webRequest);
 
-        // 6. Restitution de la réponse vers ServerResponse de Node
+        // 6. Write web response back to Node.js ServerResponse
         res.statusCode = webResponse.status;
         webResponse.headers.forEach((val, key) => {
           res.setHeader(key, val);
@@ -68,7 +68,7 @@ export function serveNode(app: Ready, options: ServerOptions = {}): Promise<Serv
           res.end();
         }
       } catch (err) {
-        // Secours en cas d'erreur de bas niveau dans l'adaptateur
+        // Fallback for unexpected adapter-level errors
         res.statusCode = 500;
         res.setHeader("Content-Type", "application/json; charset=utf-8");
         res.end(

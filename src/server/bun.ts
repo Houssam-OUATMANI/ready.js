@@ -1,13 +1,13 @@
 /**
  * @file server/bun.ts
- * @description Adaptateur de serveur ultra-rapide pour Bun (Bun.serve).
- * Utilise les capacités natives de Bun sans aucune couche d'émulation.
+ * @description High-performance native HTTP server adapter for Bun (Bun.serve).
+ * Leverages Bun's native C++ HTTP engine without emulation layers.
  */
 
 import type { Ready } from "../app.js";
 import type { ServerInstance, ServerOptions } from "../types/index.js";
 
-// Déclaration de type pour l'environnement global Bun
+// Global type declaration for the Bun runtime environment
 declare const Bun: {
   serve: (options: {
     port?: number;
@@ -21,7 +21,10 @@ declare const Bun: {
 };
 
 /**
- * Démarre le serveur en utilisant l'API ultra-rapide native Bun.serve().
+ * Starts the server using Bun's high-speed native Bun.serve() API.
+ *
+ * @param app Ready application instance
+ * @param options Server listening options
  */
 export function serveBun(app: Ready, options: ServerOptions = {}): Promise<ServerInstance> {
   const port = options.port ?? (process.env.PORT ? Number(process.env.PORT) : 3000);
