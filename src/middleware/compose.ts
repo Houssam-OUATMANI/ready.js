@@ -1,17 +1,17 @@
 /**
  * @file middleware/compose.ts
- * @description Moteur d'exécution de middlewares en cascade (modèle en oignon).
- * Permet à chaque middleware d'exécuter du code avant et après via `await next()`.
+ * @description Cascading middleware pipeline execution engine (Onion Model).
+ * Allows each middleware to execute code before and after downstream handlers via `await next()`.
  */
 
 import type { Context } from "../context.js";
 import type { Handler, Middleware } from "../types/index.js";
 
 /**
- * Compose un tableau de middlewares et gestionnaires en une seule fonction asynchrone.
+ * Composes an array of middlewares and handlers into a single asynchronous pipeline.
  *
- * @param middlewares Liste ordonnée des fonctions à exécuter
- * @returns Une fonction acceptant le contexte et exécutant la chaîne
+ * @param middlewares Ordered list of middleware/handler functions
+ * @returns A composite function taking the context and executing the chain
  */
 export function compose(middlewares: Array<Middleware | Handler>) {
   return function dispatchChain(context: Context): Promise<Response | unknown> {
@@ -19,13 +19,13 @@ export function compose(middlewares: Array<Middleware | Handler>) {
 
     function dispatch(i: number): Promise<Response | unknown> {
       if (i <= lastIndex) {
-        return Promise.reject(new Error("next() a été appelé plusieurs fois dans le même middleware"));
+        return Promise.reject(new Error("next() was called multiple times in the same middleware"));
       }
       lastIndex = i;
 
       const fn = middlewares[i];
       if (!fn) {
-        // Fin de la chaîne : si une réponse a été préparée, on la renvoie
+        // End of the chain: if a response has already been created, return it
         return Promise.resolve(context.finalResponse);
       }
 
@@ -34,12 +34,12 @@ export function compose(middlewares: Array<Middleware | Handler>) {
         const result = fn(context, next);
 
         return Promise.resolve(result).then((res) => {
-          // Si le handler a retourné directement une Response
+          // If the handler returned a Response directly
           if (res instanceof Response) {
             context.finalResponse = res;
             return res;
           }
-          // Si le handler a retourné un objet/valeur JS sérialisable (autre qu'undefined)
+          // If the handler returned a serializable non-undefined value
           if (res !== undefined && context.finalResponse === null) {
             return context.json(res);
           }
