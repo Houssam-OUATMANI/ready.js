@@ -1,5 +1,5 @@
 {
-  "name": "ready",
+  "name": "ready-framework",
   "version": "1.0.0",
   "description": "Zero-dependency, full TypeScript, multi-runtime micro-framework for RESTful JSON APIs",
   "type": "module",
