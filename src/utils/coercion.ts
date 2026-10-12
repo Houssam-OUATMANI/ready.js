@@ -1,28 +1,28 @@
 /**
  * @file utils/coercion.ts
- * @description Fonctions utilitaires de conversion et de coercion automatique des types.
- * Permet de convertir les chaînes de caractères (URL params, Query string)
- * en types primitifs (number, boolean, string) ou via un transformateur personnalisé.
+ * @description Utility functions for automatic and explicit type coercion.
+ * Converts raw string values (URL params, query strings) into primitive types
+ * (number, boolean, string) or through a custom transform function.
  */
 
 /**
- * Type représentant une fonction de transformation explicite.
+ * Function type representing an explicit value transformer.
  */
 export type ValueTransform<T> = (value: string) => T;
 
 /**
- * Coerce intelligemment une valeur textuelle brute vers un type cible T.
+ * Intelligently coerces a raw string value into a target type T.
  *
- * Règles de conversion automatique si aucun transformateur n'est fourni :
- * - "true" -> true (boolean)
+ * Automatic conversion rules when no explicit transformer is provided:
+ * - "true"  -> true (boolean)
  * - "false" -> false (boolean)
- * - Représentation numérique valide (ex: "42", "3.14") -> number
- * - Tout autre format -> chaîne de caractères d'origine
+ * - Valid numeric representation (e.g. "42", "3.14") -> number
+ * - Any other string -> untouched original string
  *
- * @template T Le type de retour attendu.
- * @param value La chaîne brute ou undefined.
- * @param transform Fonction de conversion explicite optionnelle (ex: Number, Boolean, BigInt).
- * @returns La valeur convertie dans le type demandé, ou undefined si l'entrée est undefined.
+ * @template T Expected return type.
+ * @param value Raw string input or undefined.
+ * @param transform Optional explicit conversion function (e.g. Number, Boolean, BigInt).
+ * @returns Coerced value as type T, or undefined if input is undefined.
  */
 export function coerceValue<T = unknown>(
   value: string | undefined,
@@ -32,14 +32,14 @@ export function coerceValue<T = unknown>(
     return undefined;
   }
 
-  // 1. Si une fonction de transformation explicite est fournie, on la priorise
+  // 1. If an explicit transform function is provided, prioritize it
   if (typeof transform === "function") {
     return transform(value);
   }
 
   const trimmed = value.trim();
 
-  // 2. Conversion automatique des booléens
+  // 2. Automatic boolean coercion
   if (trimmed.toLowerCase() === "true") {
     return true as unknown as T;
   }
@@ -47,22 +47,22 @@ export function coerceValue<T = unknown>(
     return false as unknown as T;
   }
 
-  // 3. Conversion automatique des nombres
-  // On vérifie que la chaîne n'est pas vide et correspond à un nombre valide
+  // 3. Automatic number coercion
+  // Verify that the string is non-empty and represents a valid numeric value
   if (trimmed !== "" && !isNaN(Number(trimmed))) {
     return Number(trimmed) as unknown as T;
   }
 
-  // 4. Par défaut, retour de la chaîne d'origine
+  // 4. Default: return original string value
   return value as unknown as T;
 }
 
 /**
- * Convertit un ensemble clé-valeur de paramètres (URL params ou Query params)
- * en un objet avec coercion automatique sur toutes les valeurs.
+ * Converts a key-value record of parameters (URL params or Query params)
+ * into an object with automatic type coercion applied to every value.
  *
- * @param record Objet contenant les valeurs sous forme de chaînes de caractères.
- * @returns Nouvel objet dont les valeurs compatibles sont converties (number, boolean).
+ * @param record Object containing string or array values.
+ * @returns New object with compatible primitive types coerced.
  */
 export function coerceRecord<T extends Record<string, unknown>>(
   record: Record<string, string | string[] | undefined>

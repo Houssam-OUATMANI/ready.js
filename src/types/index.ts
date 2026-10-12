@@ -1,13 +1,13 @@
 /**
  * @file types/index.ts
- * @description Définitions des types fondamentaux du micro-framework Ready.
- * Conçu pour un typage strict et une expérience développeur fluide (DX).
+ * @description Core type definitions for the Ready micro-framework.
+ * Designed for strict typing and an ergonomic developer experience (DX).
  */
 
 import type { Context } from "../context.js";
 
 /**
- * Méthodes HTTP supportées par le routeur.
+ * HTTP methods supported by the router.
  */
 export type HttpMethod =
   | "GET"
@@ -20,21 +20,21 @@ export type HttpMethod =
   | "ALL";
 
 /**
- * Fonction de passage au middleware suivant dans la chaîne en oignon.
+ * Function used to pass execution to the next middleware in the onion chain.
  */
 export type NextFunction = () => Promise<void>;
 
 /**
- * Type d'un gestionnaire de route standard (Handler).
- * Peut retourner une Response standard du Web ou des données JSON sérialisables.
+ * Standard route handler function.
+ * Can return a standard Web Response or serializable JSON data.
  */
 export type Handler = (
   c: Context
 ) => Response | Promise<Response> | unknown | Promise<unknown>;
 
 /**
- * Type d'un Middleware.
- * Permet d'exécuter du code avant et après la suite de la chaîne via `await next()`.
+ * Middleware function.
+ * Enables executing code before and after the downstream chain via `await next()`.
  */
 export type Middleware = (
   c: Context,
@@ -42,7 +42,7 @@ export type Middleware = (
 ) => Promise<void> | void | Promise<Response | unknown> | Response | unknown;
 
 /**
- * Gestionnaire d'erreurs global.
+ * Centralized error handler.
  */
 export type ErrorHandler = (
   err: Error,
@@ -50,19 +50,19 @@ export type ErrorHandler = (
 ) => Response | Promise<Response> | unknown | Promise<unknown>;
 
 /**
- * Gestionnaire pour les routes non trouvées (404).
+ * Handler for unmatched routes (404 Not Found).
  */
 export type NotFoundHandler = (
   c: Context
 ) => Response | Promise<Response> | unknown | Promise<unknown>;
 
 /**
- * Paramètres d'URL extraits par le routeur.
+ * Route parameter map extracted from dynamic URL segments.
  */
 export type RouteParams = Record<string, string>;
 
 /**
- * Résultat de recherche d'une route dans l'arbre Radix.
+ * Result returned upon matching an incoming route against the Radix tree.
  */
 export interface RouteMatch {
   handlers: Handler[];
@@ -70,22 +70,22 @@ export interface RouteMatch {
 }
 
 /**
- * Options de démarrage du serveur HTTP.
+ * Server startup configuration options.
  */
 export interface ServerOptions {
   /**
-   * Port d'écoute du serveur (par défaut: 3000 ou process.env.PORT).
+   * Port on which the server should listen (default: 3000 or process.env.PORT).
    */
   port?: number;
 
   /**
-   * Nom d'hôte ou adresse IP (par défaut: "0.0.0.0").
+   * Hostname or IP address to bind to (default: "0.0.0.0").
    */
   hostname?: string;
 }
 
 /**
- * Interface unifiée de l'instance de serveur retournée par listen().
+ * Unified server instance returned by listen().
  */
 export interface ServerInstance {
   port: number;
