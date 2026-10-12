@@ -6,7 +6,11 @@
  */
 
 import { coerceRecord, coerceValue, type ValueTransform } from "./utils/coercion.js";
-import type { RouteParams } from "./types/index.js";
+
+/**
+ * Route parameter map extracted from dynamic URL segments.
+ */
+export type RouteParams = Record<string, string>;
 
 export class ReadyRequest {
   /**
