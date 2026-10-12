@@ -45,6 +45,17 @@ export class Context {
    */
   public status(code: number): this {
     this._status = code;
+    if (this.finalResponse && this.finalResponse.status !== code) {
+      try {
+        this.finalResponse = new Response(this.finalResponse.body, {
+          status: code,
+          statusText: this.finalResponse.statusText,
+          headers: this.finalResponse.headers,
+        });
+      } catch {
+        // Ignore if body is not reusable
+      }
+    }
     return this;
   }
 
@@ -57,6 +68,8 @@ export class Context {
 
   /**
    * Sets or appends an HTTP response header.
+   * If a response has already been generated (e.g. after await next()),
+   * it synchronizes the header directly on the active Response instance.
    *
    * @param name Header name (e.g. "X-Response-Time", "Authorization")
    * @param value Header value
@@ -65,6 +78,19 @@ export class Context {
    */
   public header(name: string, value: string): this {
     this.resHeaders.set(name, value);
+    if (this.finalResponse) {
+      try {
+        this.finalResponse.headers.set(name, value);
+      } catch {
+        const headers = new Headers(this.finalResponse.headers);
+        headers.set(name, value);
+        this.finalResponse = new Response(this.finalResponse.body, {
+          status: this.finalResponse.status,
+          statusText: this.finalResponse.statusText,
+          headers,
+        });
+      }
+    }
     return this;
   }
 

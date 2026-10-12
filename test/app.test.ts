@@ -119,6 +119,51 @@ describe("Ready Application Core", () => {
     ]);
   });
 
+  test("allows setting response headers after await next() (e.g. X-Response-Time)", async () => {
+    const app = new Ready();
+
+    app.use(async (c, next) => {
+      const start = performance.now();
+      await next();
+      const ms = (performance.now() - start).toFixed(2);
+      c.header("X-Response-Time", `${ms}ms`);
+      c.header("X-After-Next", "applied");
+    });
+
+    app.get("/ping", (c) => c.json({ pong: true }));
+
+    const req = new Request("http://localhost/ping");
+    const res = await app.fetch(req);
+
+    assert.strictEqual(res.status, 200);
+    assert.strictEqual(res.headers.get("X-After-Next"), "applied");
+    assert.match(res.headers.get("X-Response-Time") ?? "", /^\d+(\.\d+)?ms$/);
+    const data = await res.json();
+    assert.deepStrictEqual(data, { pong: true });
+  });
+
+  test("allows modifying headers after await next() with raw Response", async () => {
+    const app = new Ready();
+
+    app.use(async (c, next) => {
+      await next();
+      c.header("X-Modified", "true");
+    });
+
+    app.get("/raw", () =>
+      new Response(JSON.stringify({ raw: true }), {
+        headers: { "Content-Type": "application/json" },
+      })
+    );
+
+    const req = new Request("http://localhost/raw");
+    const res = await app.fetch(req);
+
+    assert.strictEqual(res.headers.get("X-Modified"), "true");
+    const data = await res.json();
+    assert.deepStrictEqual(data, { raw: true });
+  });
+
   test("returns structured 404 JSON for non-existing routes", async () => {
     const app = new Ready();
     const req = new Request("http://localhost/not-found");

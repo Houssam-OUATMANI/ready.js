@@ -36,6 +36,15 @@ export function compose(middlewares: Array<Middleware | Handler>) {
         return Promise.resolve(result).then((res) => {
           // If the handler returned a Response directly
           if (res instanceof Response) {
+            context.resHeaders.forEach((val, key) => {
+              if (!res.headers.has(key)) {
+                try {
+                  res.headers.set(key, val);
+                } catch {
+                  // Ignore if headers are immutable
+                }
+              }
+            });
             context.finalResponse = res;
             return res;
           }

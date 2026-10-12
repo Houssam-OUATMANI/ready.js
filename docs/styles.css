@@ -9,6 +9,7 @@
   /* Canvas & Dark Atmosphere */
   --bg-canvas: #090a0f;
   --bg-canvas-subtle: #0d0f17;
+  --rotate-2: 2deg;
   
   /* Island Surfaces */
   --island-bg: rgba(18, 21, 30, 0.72);
@@ -389,6 +390,7 @@ body {
 }
 
 .hero-title {
+  transform: rotate(var(--rotate-2));
   font-size: clamp(2.4rem, 4.5vw, 3.8rem);
   font-weight: 800;
   line-height: 1.12;
@@ -507,6 +509,7 @@ body {
 
 /* Hero Code Showcase Island (IDE Mockup) */
 .hero-editor-island {
+  transform: rotate(var(--rotate-2));
   background: var(--code-bg);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--island-radius);

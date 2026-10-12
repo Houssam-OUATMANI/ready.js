@@ -202,13 +202,20 @@ export class Ready {
             },
           ]);
           await chain(c);
-          return (
+          const response =
             c.finalResponse ??
             c.json(
               { error: "NotFound", message: `Route not found: ${method} ${pathname}` },
               404
-            )
-          );
+            );
+          c.resHeaders.forEach((value, name) => {
+            if (!response.headers.has(name) || response.headers.get(name) !== value) {
+              try {
+                response.headers.set(name, value);
+              } catch {}
+            }
+          });
+          return response;
         }
 
         const notFoundRes = await this.notFoundHandler(c);
@@ -227,6 +234,21 @@ export class Ready {
       await chain(c);
 
       if (c.finalResponse) {
+        c.resHeaders.forEach((value, name) => {
+          if (c.finalResponse && (!c.finalResponse.headers.has(name) || c.finalResponse.headers.get(name) !== value)) {
+            try {
+              c.finalResponse.headers.set(name, value);
+            } catch {
+              const headers = new Headers(c.finalResponse.headers);
+              headers.set(name, value);
+              c.finalResponse = new Response(c.finalResponse.body, {
+                status: c.finalResponse.status,
+                statusText: c.finalResponse.statusText,
+                headers,
+              });
+            }
+          }
+        });
         return c.finalResponse;
       }
 
