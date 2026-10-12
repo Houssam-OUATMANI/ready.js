@@ -5,7 +5,7 @@ example/
 tsconfig.json
 
 # Documentation site
-docs-site/
+docs/
 
 # Git and logs
 .git/
