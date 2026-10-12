@@ -1,13 +1,19 @@
 {
-  "name": "ready-framework",
-  "version": "1.0.2",
+  "name": "ready.ts",
+  "version": "1.0.3",
   "description": "Zero-dependency, full TypeScript, multi-runtime micro-framework for RESTful JSON APIs",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Houssam-OUATMANI/ready.js.git"
+  },
   "main": "./dist/src/index.js",
   "types": "./dist/src/index.d.ts",
   "files": [
     "dist/src",
-    "README.md"
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
   ],
   "exports": {
     ".": {

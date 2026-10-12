@@ -4,7 +4,7 @@
  * Natively compatible with Node.js, Bun, and Deno without code modifications.
  */
 
-import { Ready } from "ready";
+import { Ready } from "../src/index.js";
 
 const app = new Ready();
 

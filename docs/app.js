@@ -1,5 +1,5 @@
 /**
- * Ready.js Documentation Site - Interactive Island App
+ * ready.ts Documentation Site - Interactive Island App
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -76,11 +76,11 @@ function initCopyButtons() {
 // 2. Package Manager Switcher
 function initPackageManagerSwitcher() {
   const pmCommands = {
-    bun: 'bun add ready-framework',
-    npm: 'npm install ready-framework',
-    pnpm: 'pnpm add ready-framework',
-    yarn: 'yarn add ready-framework',
-    deno: 'deno add npm:ready-framework'
+    bun: 'bun add ready.ts',
+    npm: 'npm install ready.ts',
+    pnpm: 'pnpm add ready.ts',
+    yarn: 'yarn add ready.ts',
+    deno: 'deno add npm:ready.ts'
   };
 
   const installCode = document.getElementById('pm-install-code');
@@ -251,7 +251,7 @@ function initSimulator() {
       headersPreview.textContent = 
 `Content-Type: application/json; charset=utf-8
 X-Response-Time: ${fakeLatency}ms
-X-Powered-By: Ready Micro-Framework (v1.0.0)
+X-Powered-By: ready.ts Micro-Framework (v1.0.3)
 Access-Control-Allow-Origin: *`;
     }
 
@@ -428,7 +428,7 @@ function initScrollSpy() {
 function initEditorTabs() {
   const tabs = document.querySelectorAll('.editor-tab');
   const snippets = {
-    'server.ts': `<span class="kw">import</span> { Ready } <span class="kw">from</span> <span class="str">"ready"</span>;
+    'server.ts': `<span class="kw">import</span> { Ready } <span class="kw">from</span> <span class="str">"ready.ts"</span>;
 
 <span class="kw">const</span> app = <span class="kw">new</span> <span class="typ">Ready</span>();
 
@@ -451,7 +451,7 @@ app.<span class="fn">get</span>(<span class="str">"/api/users/:id"</span>, (c) =
 <span class="cmt">// Multi-runtime server startup</span>
 <span class="kw">await</span> app.<span class="fn">listen</span>({ port: <span class="num">3000</span> });`,
 
-    'routes.ts': `<span class="kw">import</span> { Ready } <span class="kw">from</span> <span class="str">"ready"</span>;
+    'routes.ts': `<span class="kw">import</span> { Ready } <span class="kw">from</span> <span class="str">"ready.ts"</span>;
 
 <span class="cmt">// Modular sub-router</span>
 <span class="kw">export const</span> authRouter = <span class="kw">new</span> <span class="typ">Ready</span>();
@@ -468,7 +468,7 @@ authRouter.<span class="fn">post</span>(<span class="str">"/logout"</span>, (c) 
 <span class="cmt">// Mount to parent app</span>
 <span class="cmt">// app.route("/api/auth", authRouter);</span>`,
 
-    'middleware.ts': `<span class="kw">import</span> { Ready, <span class="kw">type</span> <span class="typ">Middleware</span> } <span class="kw">from</span> <span class="str">"ready"</span>;
+    'middleware.ts': `<span class="kw">import</span> { Ready, <span class="kw">type</span> <span class="typ">Middleware</span> } <span class="kw">from</span> <span class="str">"ready.ts"</span>;
 
 <span class="cmt">// Path-scoped JWT guard</span>
 <span class="kw">export const</span> jwtAuth: <span class="typ">Middleware</span> = <span class="kw">async</span> (c, next) => {
