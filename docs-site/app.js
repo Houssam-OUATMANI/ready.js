@@ -76,11 +76,11 @@ function initCopyButtons() {
 // 2. Package Manager Switcher
 function initPackageManagerSwitcher() {
   const pmCommands = {
-    bun: 'bun add ready',
-    npm: 'npm install ready',
-    pnpm: 'pnpm add ready',
-    yarn: 'yarn add ready',
-    deno: 'deno add npm:ready'
+    bun: 'bun add ready-framework',
+    npm: 'npm install ready-framework',
+    pnpm: 'pnpm add ready-framework',
+    yarn: 'yarn add ready-framework',
+    deno: 'deno add npm:ready-framework'
   };
 
   const installCode = document.getElementById('pm-install-code');

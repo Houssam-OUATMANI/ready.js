@@ -28,13 +28,13 @@
 
 ```bash
 # Using bun
-bun add ready
+bun add ready-framework
 
 # Using npm
-npm install ready
+npm install ready-framework
 
 # Using pnpm
-pnpm add ready
+pnpm add ready-framework
 ```
 
 ---

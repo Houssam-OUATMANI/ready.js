@@ -6,7 +6,7 @@
   <title>Ready.js — Zero-Dependency TypeScript Micro-Framework</title>
   <meta name="description" content="Zero-dependency, full TypeScript, multi-runtime micro-framework designed exclusively for RESTful JSON APIs across Bun, Node.js, and Deno.">
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><polygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'/></svg>">
 </head>
 <body>
 
@@ -22,7 +22,11 @@
   <header class="dock-container">
     <div class="dock-island">
       <a href="#overview" class="dock-brand">
-        <div class="dock-logo-icon">⚡</div>
+        <div class="dock-logo-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+        </div>
         <span>ready<span style="color: var(--accent-cyan);">.js</span></span>
       </a>
       <span class="dock-version-pill">v1.0.0</span>
@@ -46,7 +50,7 @@
 
       <div class="dock-actions">
         <button class="dock-search-btn" id="dock-search-trigger" title="Quick Search (Ctrl+K)">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
@@ -55,7 +59,7 @@
         </button>
 
         <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="dock-github-btn" title="GitHub Repository">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
           </svg>
         </a>
@@ -86,22 +90,30 @@
             for modern JSON APIs.
           </h1>
           <p class="hero-description">
-            Engineered exclusively for blazing-fast RESTful APIs. Runs natively on 
+            Engineered exclusively for high-performance RESTful services. Executes natively across 
             <strong>Bun</strong>, <strong>Node.js (18+)</strong>, and <strong>Deno</strong> with automatic parameter type coercion, 
-            onion-model middleware, and strict TypeScript ergonomics.
+            onion-model middleware pipeline, and strict TypeScript contracts.
           </p>
 
           <div class="hero-actions">
             <a href="#quickstart" class="btn-island-primary">
               <span>Get Started</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
             </a>
             <a href="#simulator" class="btn-island-secondary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" y1="21" x2="4" y2="14"></line>
+                <line x1="4" y1="10" x2="4" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12" y2="3"></line>
+                <line x1="20" y1="21" x2="20" y2="16"></line>
+                <line x1="20" y1="12" x2="20" y2="3"></line>
+                <line x1="1" y1="14" x2="7" y2="14"></line>
+                <line x1="9" y1="8" x2="15" y2="8"></line>
+                <line x1="17" y1="16" x2="23" y2="16"></line>
               </svg>
               <span>Try Live Simulator</span>
             </a>
@@ -109,9 +121,9 @@
 
           <!-- Quick Install Pill -->
           <div class="hero-install-box">
-            <div class="hero-install-code" id="hero-pm-code">bun add ready</div>
+            <div class="hero-install-code" id="hero-pm-code">bun add ready-framework</div>
             <button class="copy-mini-btn" data-target="#hero-pm-code" title="Copy installation command">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
               </svg>
@@ -134,7 +146,7 @@
             </div>
             <div class="editor-meta-badge">TS 5.9 Strict</div>
           </div>
-          <pre class="editor-body" id="hero-editor-code"><span class="kw">import</span> { Ready } <span class="kw">from</span> <span class="str">"ready"</span>;
+          <pre class="editor-body" id="hero-editor-code"><span class="kw">import</span> { Ready } <span class="kw">from</span> <span class="str">"ready-framework"</span>;
 
 <span class="kw">const</span> app = <span class="kw">new</span> <span class="typ">Ready</span>();
 
@@ -163,28 +175,54 @@ app.<span class="fn">get</span>(<span class="str">"/api/users/:id"</span>, (c) =
     <!-- METRICS STRIP ISLAND -->
     <div class="metrics-strip">
       <div class="island metric-island island-interactive">
-        <div class="metric-icon-box" style="background: rgba(56, 189, 248, 0.12); color: var(--accent-cyan);">⚡</div>
+        <div class="metric-icon-box" style="background: rgba(56, 189, 248, 0.12); color: var(--accent-cyan);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+        </div>
         <div>
           <div class="metric-value">0 deps</div>
           <div class="metric-label">Zero external runtime dependencies</div>
         </div>
       </div>
       <div class="island metric-island island-interactive">
-        <div class="metric-icon-box" style="background: rgba(99, 102, 241, 0.12); color: var(--accent-indigo);">🌐</div>
+        <div class="metric-icon-box" style="background: rgba(99, 102, 241, 0.12); color: var(--accent-indigo);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+            <line x1="6" y1="6" x2="6.01" y2="6"></line>
+            <line x1="6" y1="18" x2="6.01" y2="18"></line>
+          </svg>
+        </div>
         <div>
           <div class="metric-value">3 Runtimes</div>
           <div class="metric-label">Native Bun, Node.js (18+), Deno</div>
         </div>
       </div>
       <div class="island metric-island island-interactive">
-        <div class="metric-icon-box" style="background: rgba(16, 185, 129, 0.12); color: var(--accent-emerald);">🚀</div>
+        <div class="metric-icon-box" style="background: rgba(16, 185, 129, 0.12); color: var(--accent-emerald);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="18" r="3"></circle>
+            <circle cx="6" cy="6" r="3"></circle>
+            <circle cx="18" cy="6" r="3"></circle>
+            <path d="M18 9v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9"></path>
+            <path d="M12 12v3"></path>
+          </svg>
+        </div>
         <div>
           <div class="metric-value">O(k) Radix</div>
           <div class="metric-label">Path-length Trie router search</div>
         </div>
       </div>
       <div class="island metric-island island-interactive">
-        <div class="metric-icon-box" style="background: rgba(245, 158, 11, 0.12); color: var(--accent-amber);">✨</div>
+        <div class="metric-icon-box" style="background: rgba(245, 158, 11, 0.12); color: var(--accent-amber);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+        </div>
         <div>
           <div class="metric-value">Strict Types</div>
           <div class="metric-label">Type coercion for params, query & body</div>
@@ -199,28 +237,160 @@ app.<span class="fn">get</span>(<span class="str">"/api/users/:id"</span>, (c) =
       <aside class="island sidebar-island">
         <div class="sidebar-heading">Getting Started</div>
         <ul class="sidebar-menu">
-          <li><a href="#overview" class="sidebar-link active"><span class="sidebar-icon">🚀</span> Overview</a></li>
-          <li><a href="#installation" class="sidebar-link"><span class="sidebar-icon">📦</span> Installation</a></li>
-          <li><a href="#quickstart" class="sidebar-link"><span class="sidebar-icon">⚡</span> Quick Start</a></li>
+          <li>
+            <a href="#overview" class="sidebar-link active">
+              <svg class="sidebar-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+              </svg>
+              Overview
+            </a>
+          </li>
+          <li>
+            <a href="#installation" class="sidebar-link">
+              <svg class="sidebar-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              </svg>
+              Installation
+            </a>
+          </li>
+          <li>
+            <a href="#quickstart" class="sidebar-link">
+              <svg class="sidebar-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+              Quick Start
+            </a>
+          </li>
         </ul>
 
         <div class="sidebar-heading">Core Architecture</div>
         <ul class="sidebar-menu">
-          <li><a href="#request" class="sidebar-link"><span class="sidebar-icon">📥</span> Request (c.req)</a></li>
-          <li><a href="#request-coercion" class="sidebar-link"><span class="sidebar-icon">🔄</span> Type Coercion</a></li>
-          <li><a href="#context" class="sidebar-link"><span class="sidebar-icon">📤</span> Context & Responses</a></li>
-          <li><a href="#routing" class="sidebar-link"><span class="sidebar-icon">🌲</span> Radix Tree Routing</a></li>
-          <li><a href="#subrouting" class="sidebar-link"><span class="sidebar-icon">🧩</span> Modular Sub-Apps</a></li>
-          <li><a href="#middleware" class="sidebar-link"><span class="sidebar-icon">🧅</span> Onion Middleware</a></li>
-          <li><a href="#error-handling" class="sidebar-link"><span class="sidebar-icon">🛡️</span> Error Handling</a></li>
-          <li><a href="#runtimes" class="sidebar-link"><span class="sidebar-icon">⚙️</span> Multi-Runtime Adapters</a></li>
+          <li>
+            <a href="#request" class="sidebar-link">
+              <svg class="sidebar-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path>
+                <path d="M12 12v9"></path>
+                <path d="m8 17 4 4 4-4"></path>
+              </svg>
+              Request (c.req)
+            </a>
+          </li>
+          <li>
+            <a href="#request-coercion" class="sidebar-link">
+              <svg class="sidebar-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 4 23 10 17 10"></polyline>
+                <polyline points="1 20 1 14 7 14"></polyline>
+                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+              </svg>
+              Type Coercion
+            </a>
+          </li>
+          <li>
+            <a href="#context" class="sidebar-link">
+              <svg class="sidebar-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              Context & Responses
+            </a>
+          </li>
+          <li>
+            <a href="#routing" class="sidebar-link">
+              <svg class="sidebar-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="6" y1="3" x2="6" y2="15"></line>
+                <circle cx="18" cy="6" r="3"></circle>
+                <circle cx="6" cy="18" r="3"></circle>
+                <path d="M18 9a9 9 0 0 1-9 9"></path>
+              </svg>
+              Radix Tree Routing
+            </a>
+          </li>
+          <li>
+            <a href="#subrouting" class="sidebar-link">
+              <svg class="sidebar-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              Modular Sub-Apps
+            </a>
+          </li>
+          <li>
+            <a href="#middleware" class="sidebar-link">
+              <svg class="sidebar-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+              Onion Middleware
+            </a>
+          </li>
+          <li>
+            <a href="#error-handling" class="sidebar-link">
+              <svg class="sidebar-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+              Error Handling
+            </a>
+          </li>
+          <li>
+            <a href="#runtimes" class="sidebar-link">
+              <svg class="sidebar-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                <rect x="9" y="9" width="6" height="6"></rect>
+                <line x1="9" y1="1" x2="9" y2="4"></line>
+                <line x1="15" y1="1" x2="15" y2="4"></line>
+                <line x1="9" y1="20" x2="9" y2="23"></line>
+                <line x1="15" y1="20" x2="15" y2="23"></line>
+                <line x1="20" y1="9" x2="23" y2="9"></line>
+                <line x1="20" y1="14" x2="23" y2="14"></line>
+                <line x1="1" y1="9" x2="4" y2="9"></line>
+                <line x1="1" y1="14" x2="4" y2="14"></line>
+              </svg>
+              Multi-Runtime
+            </a>
+          </li>
         </ul>
 
         <div class="sidebar-heading">Interactive & Specs</div>
         <ul class="sidebar-menu">
-          <li><a href="#simulator" class="sidebar-link"><span class="sidebar-icon">🎮</span> Live Playground</a></li>
-          <li><a href="#benchmarks" class="sidebar-link"><span class="sidebar-icon">📊</span> Benchmarks</a></li>
-          <li><a href="#types" class="sidebar-link"><span class="sidebar-icon">🏷️</span> TypeScript Exports</a></li>
+          <li>
+            <a href="#simulator" class="sidebar-link">
+              <svg class="sidebar-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" y1="21" x2="4" y2="14"></line>
+                <line x1="4" y1="10" x2="4" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12" y2="3"></line>
+                <line x1="20" y1="21" x2="20" y2="16"></line>
+                <line x1="20" y1="12" x2="20" y2="3"></line>
+                <line x1="1" y1="14" x2="7" y2="14"></line>
+                <line x1="9" y1="8" x2="15" y2="8"></line>
+                <line x1="17" y1="16" x2="23" y2="16"></line>
+              </svg>
+              Live Playground
+            </a>
+          </li>
+          <li>
+            <a href="#benchmarks" class="sidebar-link">
+              <svg class="sidebar-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+              Benchmarks
+            </a>
+          </li>
+          <li>
+            <a href="#types" class="sidebar-link">
+              <svg class="sidebar-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="4 7 4 4 20 4 20 7"></polyline>
+                <line x1="9" y1="20" x2="15" y2="20"></line>
+                <line x1="12" y1="4" x2="12" y2="20"></line>
+              </svg>
+              TypeScript Exports
+            </a>
+          </li>
         </ul>
       </aside>
 
@@ -230,7 +400,7 @@ app.<span class="fn">get</span>(<span class="str">"/api/users/:id"</span>, (c) =
         <!-- SECTION: INSTALLATION -->
         <section class="island doc-section-island" id="installation">
           <span class="section-tag">GETTING STARTED</span>
-          <h2 class="section-title">📦 Package Installation</h2>
+          <h2 class="section-title">Package Installation</h2>
           <p class="section-desc">
             Ready is published as a pure ES Module with comprehensive TypeScript declarations. 
             Choose your preferred package manager:
@@ -248,21 +418,21 @@ app.<span class="fn">get</span>(<span class="str">"/api/users/:id"</span>, (c) =
             <div class="code-header">
               <span class="code-title">Terminal</span>
               <button class="copy-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                   <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                 </svg>
                 <span>Copy</span>
               </button>
             </div>
-            <pre class="code-pre" id="pm-install-code"><span class="kw">bun</span> add ready</pre>
+            <pre class="code-pre" id="pm-install-code"><span class="kw">bun</span> add ready-framework</pre>
           </div>
         </section>
 
         <!-- SECTION: QUICK START -->
         <section class="island doc-section-island" id="quickstart">
           <span class="section-tag">WALKTHROUGH</span>
-          <h2 class="section-title">⚡ Quick Start</h2>
+          <h2 class="section-title">Quick Start</h2>
           <p class="section-desc">
             Build a complete REST API with global middleware, typed route parameters, typed body payloads, 
             and universal multi-runtime startup in under 30 lines.
@@ -272,14 +442,14 @@ app.<span class="fn">get</span>(<span class="str">"/api/users/:id"</span>, (c) =
             <div class="code-header">
               <span class="code-title"><span class="code-lang-badge">TS</span> server.ts</span>
               <button class="copy-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                   <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                 </svg>
                 <span>Copy</span>
               </button>
             </div>
-            <pre class="code-pre"><span class="kw">import</span> { Ready } <span class="kw">from</span> <span class="str">"ready"</span>;
+            <pre class="code-pre"><span class="kw">import</span> { Ready } <span class="kw">from</span> <span class="str">"ready-framework"</span>;
 
 <span class="kw">const</span> app = <span class="kw">new</span> <span class="typ">Ready</span>();
 
@@ -328,7 +498,7 @@ console.<span class="fn">log</span>(<span class="str">`Server listening on http:
         <!-- SECTION: REQUEST HANDLING & COERCION -->
         <section class="island doc-section-island" id="request">
           <span class="section-tag">API REFERENCE</span>
-          <h2 class="section-title">📥 Request Handling (<code style="color:var(--accent-cyan);">c.req</code>)</h2>
+          <h2 class="section-title">Request Handling (<code style="color:var(--accent-cyan);">c.req</code>)</h2>
           <p class="section-desc">
             The <code style="color:var(--accent-cyan);">ReadyRequest</code> wrapper encapsulates the Web Standard Request 
             instance and enhances it with automatic type coercion, query parsing, and cached JSON reading.
@@ -336,7 +506,14 @@ console.<span class="fn">log</span>(<span class="str">`Server listening on http:
 
           <div class="feature-islands-grid">
             <div class="feature-mini-island">
-              <div class="feature-icon-badge" style="background: rgba(56, 189, 248, 0.12); color: var(--accent-cyan);">🔢</div>
+              <div class="feature-icon-badge" style="background: rgba(56, 189, 248, 0.12); color: var(--accent-cyan);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="4" y1="9" x2="20" y2="9"></line>
+                  <line x1="4" y1="15" x2="20" y2="15"></line>
+                  <line x1="10" y1="3" x2="8" y2="21"></line>
+                  <line x1="16" y1="3" x2="14" y2="21"></line>
+                </svg>
+              </div>
               <h4 class="feature-title">c.req.param&lt;T&gt;()</h4>
               <p class="feature-text">
                 Extracts dynamic path segments (e.g. <code style="color:var(--syn-string);">:id</code>). Automatically coerces 
@@ -344,14 +521,23 @@ console.<span class="fn">log</span>(<span class="str">`Server listening on http:
               </p>
             </div>
             <div class="feature-mini-island">
-              <div class="feature-icon-badge" style="background: rgba(99, 102, 241, 0.12); color: var(--accent-indigo);">🔍</div>
+              <div class="feature-icon-badge" style="background: rgba(99, 102, 241, 0.12); color: var(--accent-indigo);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </div>
               <h4 class="feature-title">c.req.query&lt;T&gt;()</h4>
               <p class="feature-text">
                 Extracts single search parameters or coerces the entire query string into a fully typed TypeScript record.
               </p>
             </div>
             <div class="feature-mini-island">
-              <div class="feature-icon-badge" style="background: rgba(16, 185, 129, 0.12); color: var(--accent-emerald);">📦</div>
+              <div class="feature-icon-badge" style="background: rgba(16, 185, 129, 0.12); color: var(--accent-emerald);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                </svg>
+              </div>
               <h4 class="feature-title">c.req.body&lt;T&gt;()</h4>
               <p class="feature-text">
                 Parses the JSON request stream into a strongly-typed DTO. Automatically caches the result for multiple reads.
@@ -389,7 +575,7 @@ console.<span class="fn">log</span>(<span class="str">`Server listening on http:
         <!-- SECTION: CONTEXT & RESPONSES -->
         <section class="island doc-section-island" id="context">
           <span class="section-tag">API REFERENCE</span>
-          <h2 class="section-title">📤 Context Object (<code style="color:var(--accent-indigo);">Context</code>)</h2>
+          <h2 class="section-title">Context Object (<code style="color:var(--accent-indigo);">Context</code>)</h2>
           <p class="section-desc">
             The <code style="color:var(--accent-indigo);">Context</code> is passed to every route handler and middleware. 
             It provides fluent setters for headers, status codes, state management, and JSON response formatting.
@@ -419,27 +605,44 @@ c.<span class="fn">set</span>(<span class="str">"currentUser"</span>, { id: <spa
         <!-- SECTION: RADIX ROUTING & SUB-ROUTING -->
         <section class="island doc-section-island" id="routing">
           <span class="section-tag">ENGINE ARCHITECTURE</span>
-          <h2 class="section-title">🌲 High-Speed Radix Tree Router</h2>
+          <h2 class="section-title">Radix Tree Router</h2>
           <p class="section-desc">
             Ready implements an internal Radix Tree (compact Trie) router that matches paths in O(k) time where k is the 
-            path segment depth, rather than iterating through regexes. Supports dynamic segments and wildcard cascades.
+            path segment depth, rather than iterating through linear regex chains. Supports dynamic segments and wildcard cascades.
           </p>
 
           <div class="feature-islands-grid">
             <div class="feature-mini-island">
-              <div class="feature-icon-badge" style="background: rgba(56, 189, 248, 0.12); color: var(--accent-cyan);">🎯</div>
+              <div class="feature-icon-badge" style="background: rgba(56, 189, 248, 0.12); color: var(--accent-cyan);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <circle cx="12" cy="12" r="6"></circle>
+                  <circle cx="12" cy="12" r="2"></circle>
+                </svg>
+              </div>
               <h4 class="feature-title">Static Match</h4>
               <p class="feature-text"><code style="color:var(--syn-string);">/api/v1/health</code><br>Matched via direct map lookup.</p>
             </div>
             <div class="feature-mini-island">
-              <div class="feature-icon-badge" style="background: rgba(99, 102, 241, 0.12); color: var(--accent-indigo);">⚡</div>
+              <div class="feature-icon-badge" style="background: rgba(99, 102, 241, 0.12); color: var(--accent-indigo);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              </div>
               <h4 class="feature-title">Dynamic Parameters</h4>
-              <p class="feature-text"><code style="color:var(--syn-string);">/users/:userId/posts/:id</code><br>Captures both keys cleanly.</p>
+              <p class="feature-text"><code style="color:var(--syn-string);">/users/:userId/posts/:id</code><br>Captures multiple keys cleanly.</p>
             </div>
             <div class="feature-mini-island">
-              <div class="feature-icon-badge" style="background: rgba(245, 158, 11, 0.12); color: var(--accent-amber);">🌟</div>
+              <div class="feature-icon-badge" style="background: rgba(245, 158, 11, 0.12); color: var(--accent-amber);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="2" x2="12" y2="22"></line>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+                  <line x1="19.07" y1="4.93" x2="4.93" y2="19.07"></line>
+                </svg>
+              </div>
               <h4 class="feature-title">Wildcards</h4>
-              <p class="feature-text"><code style="color:var(--syn-string);">/public/*</code><br>Matches any suffix subpath.</p>
+              <p class="feature-text"><code style="color:var(--syn-string);">/public/*</code><br>Matches any suffix subpath cascade.</p>
             </div>
           </div>
 
@@ -473,7 +676,7 @@ app.<span class="fn">route</span>(<span class="str">"/api/products"</span>, prod
         <!-- SECTION: ONION MIDDLEWARE & ERROR HANDLING -->
         <section class="island doc-section-island" id="middleware">
           <span class="section-tag">PIPELINE ARCHITECTURE</span>
-          <h2 class="section-title">🧅 Onion Middleware Model</h2>
+          <h2 class="section-title">Onion Middleware Model</h2>
           <p class="section-desc">
             Ready uses Koa-style cascading middleware. Calling <code style="color:var(--accent-purple);">await next()</code> 
             pauses current execution, executes downstream handlers, and resumes back for post-processing.
@@ -533,7 +736,7 @@ app.<span class="fn">onNotFound</span>((c) => {
         <!-- SECTION: MULTI-RUNTIME EXECUTION -->
         <section class="island doc-section-island" id="runtimes">
           <span class="section-tag">DEPLOYMENT & ADAPTERS</span>
-          <h2 class="section-title">⚙️ Multi-Runtime Support</h2>
+          <h2 class="section-title">Multi-Runtime Support</h2>
           <p class="section-desc">
             Write your API once and run anywhere. Ready detects your environment automatically upon calling 
             <code style="color:var(--accent-cyan);">app.listen()</code>.
@@ -541,17 +744,31 @@ app.<span class="fn">onNotFound</span>((c) => {
 
           <div class="feature-islands-grid">
             <div class="feature-mini-island">
-              <div class="feature-icon-badge" style="background: rgba(244, 63, 94, 0.12); color: var(--accent-rose);">🥟</div>
+              <div class="feature-icon-badge" style="background: rgba(244, 63, 94, 0.12); color: var(--accent-rose);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"></path>
+                </svg>
+              </div>
               <h4 class="feature-title">Bun Native</h4>
               <p class="feature-text">Binds directly to <code style="color:var(--accent-cyan);">Bun.serve()</code> with zero overhead.</p>
             </div>
             <div class="feature-mini-island">
-              <div class="feature-icon-badge" style="background: rgba(34, 197, 94, 0.12); color: var(--accent-emerald);">🟢</div>
+              <div class="feature-icon-badge" style="background: rgba(34, 197, 94, 0.12); color: var(--accent-emerald);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2 2 7l10 5 10-5-10-5Z"></path>
+                  <path d="m2 17 10 5 10-5"></path>
+                  <path d="m2 12 10 5 10-5"></path>
+                </svg>
+              </div>
               <h4 class="feature-title">Node.js (18+)</h4>
               <p class="feature-text">Uses native <code style="color:var(--accent-cyan);">node:http</code> and translates Web Streams effortlessly.</p>
             </div>
             <div class="feature-mini-island">
-              <div class="feature-icon-badge" style="background: rgba(56, 189, 248, 0.12); color: var(--accent-cyan);">🦕</div>
+              <div class="feature-icon-badge" style="background: rgba(56, 189, 248, 0.12); color: var(--accent-cyan);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+                </svg>
+              </div>
               <h4 class="feature-title">Deno / Edge</h4>
               <p class="feature-text">Exposes standard <code style="color:var(--accent-cyan);">app.fetch(request)</code> for Cloudflare Workers & Fastly.</p>
             </div>
@@ -574,7 +791,7 @@ app.<span class="fn">onNotFound</span>((c) => {
           <div class="sim-header">
             <div>
               <span class="sim-badge">INTERACTIVE EXPERIMENT</span>
-              <h2 style="font-size: 1.5rem; font-weight: 700; margin-top: 6px;">🎮 Live Framework Simulator</h2>
+              <h2 style="font-size: 1.5rem; font-weight: 700; margin-top: 6px;">Live Framework Simulator</h2>
             </div>
             <select class="sim-select" id="sim-preset">
               <option value="user-get">Preset: GET /api/users/:id</option>
@@ -594,7 +811,7 @@ app.<span class="fn">onNotFound</span>((c) => {
             <input type="text" class="sim-input" id="sim-url" value="/api/users/42?limit=10" placeholder="/api/users/:id">
             <button class="sim-btn-send" id="sim-send-btn">
               <span>Send</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="22" y1="2" x2="11" y2="13"></line>
                 <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
               </svg>
@@ -639,7 +856,7 @@ X-Powered-By: Ready Micro-Framework (v1.0.0)</pre>
         <!-- SECTION: BENCHMARKS & COMPARISONS -->
         <section class="island doc-section-island" id="benchmarks">
           <span class="section-tag">PERFORMANCE & ARCHITECTURE</span>
-          <h2 class="section-title">📊 Architectural Comparison</h2>
+          <h2 class="section-title">Architectural Comparison</h2>
           <p class="section-desc">
             Ready was crafted to strip away legacy baggage (HTML rendering, view engines, sessions) and focus 100% on pure 
             JSON API micro-services.
@@ -658,24 +875,24 @@ X-Powered-By: Ready Micro-Framework (v1.0.0)</pre>
             <tbody>
               <tr class="highlight-row">
                 <td>Zero Runtime Dependencies</td>
-                <td><span class="check-pill">✓ 0 Dependencies</span></td>
-                <td><span class="cross-pill">✗ 30+ Dependencies</span></td>
-                <td><span class="cross-pill">✗ 15+ Dependencies</span></td>
-                <td><span class="check-pill">✓ 0 Dependencies</span></td>
+                <td><span class="check-pill">0 Dependencies</span></td>
+                <td><span class="cross-pill">30+ Dependencies</span></td>
+                <td><span class="cross-pill">15+ Dependencies</span></td>
+                <td><span class="check-pill">0 Dependencies</span></td>
               </tr>
               <tr>
                 <td>Multi-Runtime (Node, Bun, Deno)</td>
-                <td><span class="check-pill">✓ Native Universal</span></td>
-                <td><span class="cross-pill">✗ Node.js only</span></td>
-                <td><span class="cross-pill">✗ Node.js mostly</span></td>
-                <td><span class="check-pill">✓ Universal</span></td>
+                <td><span class="check-pill">Native Universal</span></td>
+                <td><span class="cross-pill">Node.js only</span></td>
+                <td><span class="cross-pill">Node.js mostly</span></td>
+                <td><span class="check-pill">Universal</span></td>
               </tr>
               <tr>
                 <td>Automatic Param Type Coercion</td>
-                <td><span class="check-pill">✓ Built-in typed &lt;T&gt;</span></td>
-                <td><span class="cross-pill">✗ string only</span></td>
-                <td><span class="cross-pill">✗ Requires schema</span></td>
-                <td><span class="cross-pill">✗ Requires validator</span></td>
+                <td><span class="check-pill">Built-in typed &lt;T&gt;</span></td>
+                <td><span class="cross-pill">string only</span></td>
+                <td><span class="cross-pill">Requires schema</span></td>
+                <td><span class="cross-pill">Requires validator</span></td>
               </tr>
               <tr>
                 <td>Routing Algorithm</td>
@@ -686,8 +903,8 @@ X-Powered-By: Ready Micro-Framework (v1.0.0)</pre>
               </tr>
               <tr>
                 <td>RESTful JSON Focus</td>
-                <td><span class="check-pill">✓ 100% JSON Pure</span></td>
-                <td><span class="cross-pill">✗ Heavy HTML/View bloat</span></td>
+                <td><span class="check-pill">100% JSON Pure</span></td>
+                <td><span class="cross-pill">Heavy HTML/View bloat</span></td>
                 <td>Hybrid</td>
                 <td>Hybrid</td>
               </tr>
@@ -698,7 +915,7 @@ X-Powered-By: Ready Micro-Framework (v1.0.0)</pre>
         <!-- SECTION: TYPESCRIPT DX & EXPORTS -->
         <section class="island doc-section-island" id="types">
           <span class="section-tag">TYPESCRIPT CONTRACTS</span>
-          <h2 class="section-title">🏷️ Type Declarations & Exports</h2>
+          <h2 class="section-title">Type Declarations & Exports</h2>
           <p class="section-desc">
             All primitives, handlers, middlewares, and configuration structures are strictly typed and exported from 
             the root module.
@@ -720,7 +937,7 @@ X-Powered-By: Ready Micro-Framework (v1.0.0)</pre>
   <span class="typ">RouteMatch</span>,       <span class="cmt">// { handlers: Handler[], params: RouteParams }</span>
   <span class="typ">ServerOptions</span>,    <span class="cmt">// { port?: number, hostname?: string }</span>
   <span class="typ">ServerInstance</span>    <span class="cmt">// { port: number, hostname: string, close: () => void }</span>
-} <span class="kw">from</span> <span class="str">"ready"</span>;</pre>
+} <span class="kw">from</span> <span class="str">"ready-framework"</span>;</pre>
           </div>
         </section>
 
@@ -730,9 +947,13 @@ X-Powered-By: Ready Micro-Framework (v1.0.0)</pre>
     <!-- FOOTER ISLAND -->
     <footer class="island footer-island">
       <div class="footer-left">
-        <div class="dock-logo-icon">⚡</div>
+        <div class="dock-logo-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+        </div>
         <div>
-          <div class="footer-brand">Ready.js</div>
+          <div class="footer-brand">ready.js</div>
           <div class="footer-text">Zero-dependency micro-framework for RESTful JSON APIs. Released under the MIT License.</div>
         </div>
       </div>
@@ -750,7 +971,7 @@ X-Powered-By: Ready Micro-Framework (v1.0.0)</pre>
   <div class="search-modal-backdrop" id="search-modal">
     <div class="search-modal-island">
       <div class="search-input-box">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
