@@ -1,4 +1,4 @@
-# 🚀 Ready
+#  Ready
 
 > **Zero-dependency, full TypeScript, multi-runtime micro-framework designed exclusively for RESTful JSON APIs.**
 
@@ -8,7 +8,7 @@
 
 ---
 
-## ✨ Features
+##  Features
 
 - **Zero Runtime Dependencies**: The entire HTTP, routing, coercion, and server adapter layer has 0 external runtime dependencies.
 - **Multi-Runtime Ready**: Run seamlessly on **Bun**, **Node.js (18+)**, and **Deno** without changing a single line of code.
@@ -24,7 +24,7 @@
 
 ---
 
-## 📦 Installation
+##  Installation
 
 ```bash
 # Using bun
@@ -89,7 +89,7 @@ console.log(`Server listening on http://${server.hostname}:${server.port}`);
 
 ---
 
-## 🛠️ API Reference
+##  API Reference
 
 ### 1. Request Handling (`c.req`)
 
@@ -215,7 +215,7 @@ export default {
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 ```bash
 # Run tests with Node.js built-in test runner
@@ -227,6 +227,6 @@ npm run test:bun
 
 ---
 
-## 📄 License
+## License
 
 MIT © [Ready](https://github.com/ready)
